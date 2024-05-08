@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+  @font-face{
+    font-family: "Lato-Regular";
+    font-style:normal;
+    src: url('/src/assets/fonts/Lato-Regular.ttf') format("truetype");
+  }
+   @font-face{
+    font-family: "Lato-Thin";
+    font-style:normal;
+    src: url('/src/assets/fonts/Lato-Thin.ttf') format("truetype");
+  }
+   @font-face{
+    font-family: "Lato-ThinItalic";
+    font-style:italic;
+    src: url('/src/assets/fonts/Lato-ThinItalic.ttf') format("truetype");
+  }
+   @font-face{
+    font-family: "Lato-Italic";
+    font-style:italic;
+    src: url('/src/assets/fonts/Lato-Italic.ttf') format("truetype");
+  }
+
+ @font-face{
+    font-family: "Lato-Light";
+    font-style:normal;
+    src: url('/src/assets/fonts/Lato-Light.ttf') format("truetype");
+  }
+   @font-face{
+    font-family: "Lato-LightItalic";
+    font-style:italic;
+    src: url('/src/assets/fonts/Lato-LightItalic.ttf') format("truetype");
+  }
+   @font-face{
+    font-family: "Lato-ThinItalic";
+    font-style:italic;
+    src: url('/src/assets/fonts/Lato-ThinItalic.ttf') format("truetype");
+  }
+   @font-face{
+    font-family: "Lato-Black";
+    font-style:normal;
+    src: url('/src/assets/fonts/Lato-Black.ttf') format("truetype");
+  }
+ @font-face{
+    font-family: "Lato-BlackItalic";
+    font-style:italic;
+    src: url('/src/assets/fonts/Lato-BlackItalic.ttf') format("truetype");
+  }
+   @font-face{
+    font-family: "Lato-Bold";
+    font-style:normal;
+    src: url('/src/assets/fonts/Lato-Bold.ttf') format("truetype");
+  }
