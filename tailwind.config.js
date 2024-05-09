@@ -15,9 +15,22 @@ export default withMT ({
         'Lato-Light': ['Lato-Light', 'sans-serif'],
         'Lato-LightItalic': ['Lato-LightItalic', 'sans-serif'],
         'Lato-Bold': ['Lato-Bold', 'serif'],
+        'Lato-Black': ['Lato-Black', 'sans-serif'],
         'Lato-BlackItalic': ['Lato-BlackItalic', 'sans-serif'],
       }
     },
+  colors: {
+  'blue-primary': '#039be5',
+  'Light-blue': '#C7EEFF',
+  'Light-pink': '#f5d4d3ff',
+  'Light-Red': '#f57d7fff',
+  'Light-Orange': '##f5dfd5ff',
+  'Light-Purple': '#ded3f5ff',
+  'Light-secondary': '#FAFAFA',
+
+  'Dark-primary': '#1D242B',    
+}
+
   },
   plugins: [],
 }

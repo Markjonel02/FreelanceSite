@@ -1,16 +1,20 @@
 import NavbarWithMegaMenu from "./Navigation";
 import MainContainer from "./MainContainer";
 import { Routes, Route } from "react-router-dom";
+import Home from "../routes/Home";
+import Contactus from "../routes/Contactus";
 const App = () => {
+  const Classname = ["bg-blue-gray-50", "w-screen", "h-screen"].join(" ");
   return (
     <>
       <div className="navigation">
         <NavbarWithMegaMenu />
       </div>
       <div className="main">
-        <MainContainer>
+        <MainContainer className={Classname}>
           <Routes>
-            <Route></Route>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/contact" element={<Contactus />}></Route>
           </Routes>
         </MainContainer>
       </div>
