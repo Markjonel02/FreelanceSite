@@ -21,13 +21,15 @@ export default withMT ({
     },
   colors: {
   'blue-primary': '#039be5',
+  'Lighter-Blue': '#d3e8f2ff',
   'Light-blue': '#C7EEFF',
   'Light-pink': '#f5d4d3ff',
   'Light-Red': '#f57d7fff',
   'Light-Orange': '##f5dfd5ff',
   'Light-Purple': '#ded3f5ff',
+  'Light-Purple2': '#cebcf5ff',
+  'Dark-Purple': '#9f7df5ff',
   'Light-secondary': '#FAFAFA',
-
   'Dark-primary': '#1D242B',    
 }
 
