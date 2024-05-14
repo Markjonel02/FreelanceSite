@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Anim from "../assets/images/Anim.gif";
 import Blob from "../assets/images/Blob.svg";
+import ParallaxEffect from "../components/Home/ParallaxEffect";
+import AnimatedText from "../components/Home/AnimatedText";
 const Home = () => {
   /* change the span color when window width is less than 800 */
   const [windowWidth, setwindowWidth] = useState(window.innerWidth);
@@ -16,7 +18,7 @@ const Home = () => {
   }, []);
 
   const SelectedSpancolor =
-    windowWidth <= 800 ? "text-Dark-primary" : "text-blue-primary";
+    windowWidth <= 800 ? "text-Dark-primary" : "text-blue-primary  ";
 
   return (
     <>
@@ -24,18 +26,35 @@ const Home = () => {
         {/* Left side content */}
         <div className="order-2 md:order-1 text-container w-full md:w-1/2 mb-20 flex xl:justify-center items-center">
           <div className="flex justify-center flex-col text-center md:text-left">
-            <div className="text-4xl md:text-5xl lg:text-6xl font-Lato-Black">
-              <h1>Welcome to</h1>
-              <span className="text-blue-primary Capitalize">
-                Project <span className={SelectedSpancolor}>Hub</span>
+            <div className="text-4xl md:text-5xl lg:text-6xl font-Lato-Black mb-5">
+              <h1 data-aos="fade-right" data-aos-duration="1000">
+                Welcome to
+              </h1>
+              <span
+                className="text-blue-primary Capitalize"
+                data-aos="fade-right"
+                data-aos-duration="1500"
+              >
+                Project{" "}
+                <span
+                  className={SelectedSpancolor}
+                  data-aos="fade-right"
+                  data-aos-duration="1500"
+                >
+                  Hub
+                </span>
               </span>
             </div>
-            <div className="text-4xl md:text-5xl lg:text-6xl font-Lato-Light mt-5">
+            <div
+              className="text-4xl md:text-5xl lg:text-6xl font-Lato-Light "
+              data-aos="fade-right"
+              data-aos-duration="2000"
+            >
               <p className="text-lg md:text-xl lg:text-xl mb-auto">
                 Where ideas ignite! Collaborate, organize, and conquer.
               </p>
               <p className="text-lg md:text-xl lg:text-xl mt-auto">
-                Let's make your projects happen
+                Let{"'"}s make your projects happen
               </p>
             </div>
           </div>
@@ -43,7 +62,7 @@ const Home = () => {
 
         <div className="relative  w-1/2 ">
           <div className="order-1 border relative">
-            <div className="relative mb-20">
+            <div className="relative mb-10">
               {/* Background Blob */}
               <img
                 className="w-full h-auto"
@@ -67,6 +86,8 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <AnimatedText />
+      <ParallaxEffect />
     </>
   );
 };

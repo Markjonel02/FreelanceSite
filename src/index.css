@@ -54,3 +54,8 @@
     font-style:normal;
     src: url('/src/assets/fonts/Lato-Bold.ttf') format("truetype");
   }
+
+
+  .custom-text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
