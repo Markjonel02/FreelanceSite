@@ -46,7 +46,7 @@ const Home = () => {
               </span>
             </div>
             <div
-              className="text-4xl md:text-5xl lg:text-6xl font-Lato-Light "
+              className="text-4xl md:text-5xl lg:text-6xl font-Lato-Light mb-5 "
               data-aos="fade-right"
               data-aos-duration="2000"
             >
@@ -56,6 +56,11 @@ const Home = () => {
               <p className="text-lg md:text-xl lg:text-xl mt-auto">
                 Let{"'"}s make your projects happen
               </p>
+            </div>
+            <div className="relative">
+              <button className="border  border-Light-blue px-5 py-4 rounded-lg">
+                Get Start
+              </button>
             </div>
           </div>
         </div>

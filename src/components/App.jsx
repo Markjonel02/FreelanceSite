@@ -4,7 +4,13 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../routes/Home";
 import Contactus from "../routes/Contactus";
 const App = () => {
-  const Classname = ["bg-blue-gray-50", "w-full", "h-screen"].join(" ");
+  const Classname = [
+    "bg-blue-gray-50",
+    "w-full",
+    "h-screen",
+    "antialiased",
+    "scroll-smooth",
+  ].join(" ");
   return (
     <>
       <div className="navigation">

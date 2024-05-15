@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+import Banner from "../Home/Banner";
 gsap.registerPlugin(ScrollTrigger);
 
 const ParallaxEffect = () => {
@@ -57,17 +57,7 @@ const ParallaxEffect = () => {
       className="parallax-container relative overflow-hidden"
       style={{ height: "300vh" }}
     >
-      <div
-        className="parallax-item absolute inset-0 flex items-center justify-center bg-blue-500 rounded-lg"
-        style={{ height: "100vh", top: "0" }}
-      >
-        <div className="parallax-content text-center">
-          <h1 className="text-white text-4xl mb-4">First Layer</h1>
-          <p className="text-white text-lg">
-            This is some content on the first layer.
-          </p>
-        </div>
-      </div>
+      <Banner />
       <div
         className="parallax-item absolute inset-0 flex items-center justify-center bg-green-500 rounded-lg"
         style={{ height: "100vh", top: "100vh" }}
