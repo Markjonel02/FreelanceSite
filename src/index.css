@@ -59,3 +59,12 @@
   .custom-text-shadow {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   }
+.parallax-content {
+  z-index: 10;
+  text-align: center;
+}
+
+.parallax-layer {
+  z-index: 1;
+  will-change: transform;
+}

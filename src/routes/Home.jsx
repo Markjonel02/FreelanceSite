@@ -3,6 +3,7 @@ import Anim from "../assets/images/Anim.gif";
 import Blob from "../assets/images/Blob.svg";
 import ParallaxEffect from "../components/Home/ParallaxEffect";
 import AnimatedText from "../components/Home/AnimatedText";
+import Banner from "../components/Home/Banner";
 const Home = () => {
   /* change the span color when window width is less than 800 */
   const [windowWidth, setwindowWidth] = useState(window.innerWidth);
@@ -58,7 +59,7 @@ const Home = () => {
               </p>
             </div>
             <div className="relative">
-              <button className="border  border-Light-blue px-5 py-4 rounded-lg">
+              <button className="border  border-blue-primary px-10 py-4 rounded-lg font-Lato-Regular text-xl ">
                 Get Start
               </button>
             </div>
@@ -92,6 +93,7 @@ const Home = () => {
         </div>
       </div>
       <AnimatedText />
+      <Banner />
       <ParallaxEffect />
     </>
   );

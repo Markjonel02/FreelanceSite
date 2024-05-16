@@ -1,87 +1,78 @@
-// ParallaxEffect.jsx
-import { useEffect } from "react";
-import gsap from "gsap";
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Banner from "../Home/Banner";
+
 gsap.registerPlugin(ScrollTrigger);
 
-const ParallaxEffect = () => {
+const ParallaxSection = () => {
+  const containerRef = useRef(null);
+  const parallaxRefs = useRef([]);
+
+  parallaxRefs.current = [];
+
   useEffect(() => {
-    const sections = document.querySelectorAll(".parallax-item");
-
-    sections.forEach((section) => {
-      // Container parallax animation
+    parallaxRefs.current.forEach((el) => {
       gsap.fromTo(
-        section,
-        { y: "50vh", opacity: 0, scale: 0.9 },
+        el,
+        { scale: 0.8, opacity: 0 },
         {
-          y: "0",
-          opacity: 1,
           scale: 1,
-          ease: "power2.out",
-          duration: 1.5,
-          scrollTrigger: {
-            trigger: section,
-            start: "top 85%",
-            end: "top 15%",
-            scrub: true,
-            markers: false, // Set to true to see the start and end markers
-          },
-        }
-      );
-
-      // Inner content parallax animation
-      const content = section.querySelector(".parallax-content");
-      gsap.fromTo(
-        content,
-        { y: "30vh", opacity: 0 },
-        {
-          y: "0",
           opacity: 1,
-          ease: "power2.out",
           duration: 1.5,
+          ease: "power2.out",
           scrollTrigger: {
-            trigger: section,
-            start: "top 85%",
-            end: "top 25%",
+            trigger: el,
+            start: "top 80%",
+            end: "bottom top",
             scrub: true,
-            markers: false,
           },
         }
       );
     });
   }, []);
 
+  const addToRefs = (el) => {
+    if (el && !parallaxRefs.current.includes(el)) {
+      parallaxRefs.current.push(el);
+    }
+  };
+
   return (
-    <div
-      className="parallax-container relative overflow-hidden"
-      style={{ height: "300vh" }}
-    >
-      <Banner />
+    <div ref={containerRef} className="space-y-0">
       <div
-        className="parallax-item absolute inset-0 flex items-center justify-center bg-green-500 rounded-lg"
-        style={{ height: "100vh", top: "100vh" }}
+        ref={addToRefs}
+        className="min-h-screen h-screen flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-500"
       >
-        <div className="parallax-content text-center">
-          <h1 className="text-white text-4xl mb-4">Second Layer</h1>
-          <p className="text-white text-lg">
-            This is some content on the second layer.
-          </p>
+        <div className="p-8 bg-white bg-opacity-20 rounded-lg shadow-lg text-4xl font-bold text-white">
+          Parallax Section 1
         </div>
       </div>
       <div
-        className="parallax-item absolute inset-0 flex items-center justify-center bg-red-500"
-        style={{ height: "100vh", top: "200vh" }}
+        ref={addToRefs}
+        className="min-h-screen h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600"
       >
-        <div className="parallax-content text-center">
-          <h1 className="text-white text-4xl mb-4">Third Layer</h1>
-          <p className="text-white text-lg">
-            This is some content on the third layer.
-          </p>
+        <div className="p-8 bg-white bg-opacity-20 rounded-lg shadow-lg text-4xl font-bold text-white">
+          Parallax Section 2
+        </div>
+      </div>
+      <div
+        ref={addToRefs}
+        className="min-h-screen h-screen flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-500"
+      >
+        <div className="p-8 bg-white bg-opacity-20 rounded-lg shadow-lg text-4xl font-bold text-white">
+          Parallax Section 3
+        </div>
+      </div>
+      <div
+        ref={addToRefs}
+        className="min-h-screen h-screen flex items-center justify-center bg-gradient-to-r from-pink-500 to-red-400"
+      >
+        <div className="p-8 bg-white bg-opacity-20 rounded-lg shadow-lg text-4xl font-bold text-white">
+          Parallax Section 4
         </div>
       </div>
     </div>
   );
 };
 
-export default ParallaxEffect;
+export default ParallaxSection;
