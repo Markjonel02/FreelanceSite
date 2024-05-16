@@ -1,90 +1,62 @@
 import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import "./Banner.css"; // Import CSS for styling
 
-const Banner = () => {
-  const containerRef = useRef(null);
-  const cardsRef = useRef([]);
+const InfiniteSlider = () => {
+  const sliderRef = useRef(null);
+  const animationRef = useRef(null);
+  const speed = 50; // Speed in pixels per second
 
   useEffect(() => {
-    const container = containerRef.current;
-    const cards = cardsRef.current;
+    const slider = sliderRef.current;
 
-    // Initialize GSAP timeline
-    const tl = gsap.timeline({ repeat: -1 });
+    // Clone slides
+    const slides = [...slider.children];
+    const cloneSlides = () => {
+      const sliderWidth = slider.clientWidth;
+      let totalWidth = 0;
+      while (totalWidth < sliderWidth * 2) {
+        slides.forEach((slide) => {
+          const clone = slide.cloneNode(true);
+          slider.appendChild(clone);
+          totalWidth += slide.clientWidth;
+        });
+      }
+    };
 
-    // Define animations for each card
-    cards.forEach((card, index) => {
-      tl.fromTo(
-        card,
-        { xPercent: 100 },
-        { xPercent: -100, duration: 5, ease: "power1.inOut" },
-        "+=2" // Delay between animations
-      );
-    });
+    // Start animation
+    const startAnimation = () => {
+      let startTime = null;
+      const animate = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const offset = (speed * elapsed) / 1000;
+        slider.style.transform = `translateX(-${offset}px)`;
+        if (offset >= slider.scrollWidth / 2) {
+          startTime = null;
+          slider.style.transform = `translateX(0)`;
+        }
+        animationRef.current = requestAnimationFrame(animate);
+      };
+      animationRef.current = requestAnimationFrame(animate);
+    };
 
-    // Animate the timeline
-    tl.play();
+    cloneSlides();
+    startAnimation();
 
-    // Clean up function
     return () => {
-      tl.kill();
+      cancelAnimationFrame(animationRef.current);
     };
   }, []);
 
   return (
-    <div className="overflow-hidden">
-      <div
-        ref={containerRef}
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 banner-container"
-      >
-        {/* Card 1 */}
-        <div
-          ref={(el) => (cardsRef.current[0] = el)}
-          className="card bg-white shadow-md rounded-lg p-4"
-        >
-          <h2 className="text-lg font-semibold mb-2">Card 1</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-            odio. Praesent libero. Sed cursus ante dapibus diam.
-          </p>
-        </div>
-        {/* Card 2 */}
-        <div
-          ref={(el) => (cardsRef.current[1] = el)}
-          className="card bg-white shadow-md rounded-lg p-4"
-        >
-          <h2 className="text-lg font-semibold mb-2">Card 2</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-            odio. Praesent libero. Sed cursus ante dapibus diam.
-          </p>
-        </div>
-        {/* Card 3 */}
-        <div
-          ref={(el) => (cardsRef.current[2] = el)}
-          className="card bg-white shadow-md rounded-lg p-4"
-        >
-          <h2 className="text-lg font-semibold mb-2">Card 3</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-            odio. Praesent libero. Sed cursus ante dapibus diam.
-          </p>
-        </div>
-        {/* Card 4 */}
-        <div
-          ref={(el) => (cardsRef.current[3] = el)}
-          className="card bg-white shadow-md rounded-lg p-4"
-        >
-          <h2 className="text-lg font-semibold mb-2">Card 4</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-            odio. Praesent libero. Sed cursus ante dapibus diam.
-          </p>
-        </div>
+    <div className="overflow-hidden w-full">
+      <div ref={sliderRef} className="flex whitespace-nowrap">
+        <div className="slide p-4 bg-red-400 m-2 inline-block ">img</div>
+        <div className="slide p-4 bg-green-400 m-2 inline-block ">Slide 2</div>
+        <div className="slide p-4 bg-blue-400 m-2 inline-block ">Slide 3</div>
+        <div className="slide p-4 bg-yellow-400 m-2 inline-block">Slide 4</div>
       </div>
     </div>
   );
 };
 
-export default Banner;
+export default InfiniteSlider;

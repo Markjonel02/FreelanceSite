@@ -31,7 +31,16 @@ export default withMT ({
   'Dark-Purple': '#9f7df5ff',
   'Light-secondary': '#FAFAFA',
   'Dark-primary': '#1D242B',    
-}
+},
+ keyframes: {
+        scroll: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+      },
+      animation: {
+        scroll: "scroll 20s linear infinite",
+      },
 
   },
   plugins: [],
