@@ -59,8 +59,8 @@ const Home = () => {
               </p>
             </div>
             <div className="relative">
-              <button className="border  border-blue-primary px-10 py-4 rounded-lg font-Lato-Regular text-xl ">
-                Get Start
+              <button className="border  border-blue-primary px-10 py-4 rounded-lg font-Lato-Regular text-xl hover:bg-blue-primary hover:text-Light-secondary ">
+                Get Started
               </button>
             </div>
           </div>
