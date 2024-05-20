@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Parallaxvid from "../../assets/videos/Parallax.mp4";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,11 +42,11 @@ const ParallaxSection = () => {
     <div ref={containerRef} className="space-y-0">
       <div
         ref={addToRefs}
-        className="min-h-screen h-screen flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-500"
+        className="min-h-screen h-screen flex items-center justify-center "
       >
-        <div className="p-8 bg-white bg-opacity-20 rounded-lg shadow-lg text-4xl font-bold text-white">
-          Parallax Section 1
-        </div>
+        <video autoPlay loop muted className="w-full h-full absolute">
+          <source src={Parallaxvid} type="video/mp4" />
+        </video>
       </div>
       <div
         ref={addToRefs}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import jspng from "../../assets/images/js.png";
 import bootstrap from "../../assets/images/bootstrap.png";

@@ -5,22 +5,25 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-
+import { PrimeReactProvider } from "primereact/api";
+import { LoadPageProvider } from "./context/LazyContext.jsx";
 const AosInitializer = () => {
   useEffect(() => {
     AOS.init();
-    // Optionally you can specify dependencies array if necessary
-    // Example: AOS.init({ once: true }); // or any other options
-  }, []); // Empty dependency array ensures this effect runs only once after initial render
+  }, []);
 
-  return null; // Since this is just for initialization, return null
+  return null;
 };
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <React.StrictMode>
-      <AosInitializer />
-      <App />
+      <LoadPageProvider>
+        <AosInitializer />
+        <PrimeReactProvider>
+          <App />
+        </PrimeReactProvider>
+      </LoadPageProvider>
     </React.StrictMode>
   </BrowserRouter>
 );
