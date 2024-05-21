@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Parallaxvid from "../../assets/videos/Parallax.mp4";
-
+import Hero from "./Hero";
 gsap.registerPlugin(ScrollTrigger);
 
 const ParallaxSection = () => {
@@ -50,11 +50,9 @@ const ParallaxSection = () => {
       </div>
       <div
         ref={addToRefs}
-        className="min-h-screen h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600"
+        className="min-h-screen h-screen flex items-center justify-center "
       >
-        <div className="p-8 bg-white bg-opacity-20 rounded-lg shadow-lg text-4xl font-bold text-white">
-          Parallax Section 2
-        </div>
+        <Hero />
       </div>
       <div
         ref={addToRefs}
