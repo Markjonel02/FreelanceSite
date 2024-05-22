@@ -4,7 +4,7 @@ import Blob from "../assets/images/Blob.svg";
 import ParallaxEffect from "../components/Home/ParallaxEffect";
 import AnimatedText from "../components/Home/AnimatedText";
 import Banner from "../components/Home/Banner";
-
+import ImgSlider from "../components/Home/ImgSlider";
 const Home = () => {
   /* change the span color when window width is less than 800 */
   const [windowWidth, setwindowWidth] = useState(window.innerWidth);
@@ -96,6 +96,7 @@ const Home = () => {
       <AnimatedText />
       <Banner />
       <ParallaxEffect />
+      <ImgSlider />
     </>
   );
 };

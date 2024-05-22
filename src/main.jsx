@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import App from "./components/App.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "swiper/css";
+
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { PrimeReactProvider } from "primereact/api";

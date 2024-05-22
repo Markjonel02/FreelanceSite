@@ -39,7 +39,7 @@ const ParallaxSection = () => {
   };
 
   return (
-    <div ref={containerRef} className="space-y-0">
+    <div ref={containerRef} className="space-y-0 mb-20">
       <div
         ref={addToRefs}
         className="min-h-screen h-screen flex items-center justify-center "
@@ -47,28 +47,6 @@ const ParallaxSection = () => {
         <video autoPlay loop muted className="w-full h-full absolute">
           <source src={Parallaxvid} type="video/mp4" />
         </video>
-      </div>
-      <div
-        ref={addToRefs}
-        className="min-h-screen h-screen flex items-center justify-center "
-      >
-        <Hero />
-      </div>
-      <div
-        ref={addToRefs}
-        className="min-h-screen h-screen flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-500"
-      >
-        <div className="p-8 bg-white bg-opacity-20 rounded-lg shadow-lg text-4xl font-bold text-white">
-          Parallax Section 3
-        </div>
-      </div>
-      <div
-        ref={addToRefs}
-        className="min-h-screen h-screen flex items-center justify-center bg-gradient-to-r from-pink-500 to-red-400"
-      >
-        <div className="p-8 bg-white bg-opacity-20 rounded-lg shadow-lg text-4xl font-bold text-white">
-          Parallax Section 4
-        </div>
       </div>
     </div>
   );
