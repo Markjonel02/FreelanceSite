@@ -5,6 +5,7 @@ import ParallaxEffect from "../components/Home/ParallaxEffect";
 import AnimatedText from "../components/Home/AnimatedText";
 import Banner from "../components/Home/Banner";
 import ImgSlider from "../components/Home/ImgSlider";
+
 const Home = () => {
   /* change the span color when window width is less than 800 */
   const [windowWidth, setwindowWidth] = useState(window.innerWidth);
@@ -60,17 +61,16 @@ const Home = () => {
               </p>
             </div>
             <div className="relative">
-              <button className="border  border-blue-primary px-10 py-4 rounded-lg font-Lato-Regular text-xl hover:bg-blue-primary hover:text-Light-secondary ">
+              <button className="p-ripple border  border-blue-primary px-10 py-4 rounded-lg font-Lato-Regular text-xl hover:bg-blue-primary hover:text-Light-secondary ">
                 Get Started
-              </button>
+              </button>{" "}
             </div>
           </div>
         </div>
 
         <div className="relative  w-1/2 ">
-          <div className="order-1 border relative">
+          <div className="order-1  relative">
             <div className="relative mb-10">
-              {/* Background Blob */}
               <img
                 className="w-full h-auto"
                 src={Blob}

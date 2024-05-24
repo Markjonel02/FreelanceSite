@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Light from "../assets/logo/Light.svg";
+
 import { Link } from "react-router-dom";
 import {
   Collapse,
@@ -13,29 +13,16 @@ import {
   MenuList,
   MenuItem,
 } from "@material-tailwind/react";
-import {
-  ChevronDownIcon,
-  Bars3Icon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import {
   Bars4Icon,
   GlobeAmericasIcon,
   NewspaperIcon,
-  PhoneIcon,
-  RectangleGroupIcon,
-  SquaresPlusIcon,
   SunIcon,
-  TagIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
 
 const navListMenuItems = [
-  {
-    title: "Products",
-    description: "Find the perfect solution for your needs.",
-    icon: SquaresPlusIcon,
-  },
   {
     title: "About Us",
     description: "Meet and learn about our dedication",
@@ -56,25 +43,11 @@ const navListMenuItems = [
     description: "Reach out to us for assistance or inquiries",
     icon: GlobeAmericasIcon,
   },
-  {
-    title: "Contact",
-    description: "Find the perfect solution for your needs.",
-    icon: PhoneIcon,
-  },
+
   {
     title: "News",
     description: "Read insightful articles, tips, and expert opinions.",
     icon: NewspaperIcon,
-  },
-  {
-    title: "Products",
-    description: "Find the perfect solution for your needs.",
-    icon: RectangleGroupIcon,
-  },
-  {
-    title: "Special Offers",
-    description: "Explore limited-time deals and bundles",
-    icon: TagIcon,
   },
 ];
 
@@ -129,18 +102,6 @@ function NavListMenu() {
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
               Resources
-              <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`hidden h-3 w-3 transition-transform lg:block ${
-                  isMenuOpen ? "rotate-180" : ""
-                }`}
-              />
-              <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`block h-3 w-3 transition-transform lg:hidden ${
-                  isMobileMenuOpen ? "rotate-180" : ""
-                }`}
-              />
             </ListItem>
           </Typography>
         </MenuHandler>

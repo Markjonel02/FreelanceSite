@@ -20,12 +20,12 @@ const AosInitializer = () => {
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <React.StrictMode>
-      <LoadPageProvider>
-        <AosInitializer />
-        <PrimeReactProvider>
+      <PrimeReactProvider>
+        <LoadPageProvider>
+          <AosInitializer />
           <App />
-        </PrimeReactProvider>
-      </LoadPageProvider>
+        </LoadPageProvider>
+      </PrimeReactProvider>
     </React.StrictMode>
   </BrowserRouter>
 );

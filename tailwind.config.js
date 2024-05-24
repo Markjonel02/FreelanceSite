@@ -1,5 +1,6 @@
 // tailwind.config.js
 /** @type {import('tailwindcss').Config} */
+const flowbite = require("flowbite-react/tailwind");
 import withMT from "@material-tailwind/react/utils/withMT";
 import vitePluginRequire from "vite-plugin-require";
 import react from "@vitejs/plugin-react"
@@ -38,5 +39,5 @@ export default withMT(defineConfig({
       },
     },
   },
-  plugins: [react(), vitePluginRequire()],
+  plugins: [react(), vitePluginRequire(),flowbite.plugin(),],
 }));

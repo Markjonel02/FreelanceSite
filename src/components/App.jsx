@@ -30,7 +30,6 @@ const App = () => {
     <>
       {isLoading ? (
         <>
-          {" "}
           <div className="navigation">
             <NavbarWithMegaMenu />
           </div>
