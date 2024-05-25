@@ -61,7 +61,11 @@ const Home = () => {
               </p>
             </div>
             <div className="relative">
-              <button className="p-ripple border  border-blue-primary px-10 py-4 rounded-lg font-Lato-Regular text-xl hover:bg-blue-primary hover:text-Light-secondary ">
+              <button
+                className="p-ripple border  border-blue-primary px-10 py-4 rounded-lg font-Lato-Regular text-xl hover:bg-blue-primary hover:text-Light-secondary "
+                data-aos="fade-right"
+                data-aos-duration="2500"
+              >
                 Get Started
               </button>{" "}
             </div>
