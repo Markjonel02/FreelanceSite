@@ -25,7 +25,7 @@ function NavList() {
       </Typography>
       <Typography
         as={Link}
-        to=""
+        to="/services"
         variant="small"
         color="blue-gray"
         className="font-Lato-Bold"

@@ -8,6 +8,7 @@ import { useLazyContext } from "../context/LazyContext";
 import Home from "../routes/Home";
 import Contactus from "../routes/Contactus";
 import Footer from "../components/Footer";
+import Services from "../routes/Services";
 const App = () => {
   const { isLoading } = useLazyContext();
   const Classname = [
@@ -37,6 +38,7 @@ const App = () => {
             <MainContainer className={Classname}>
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/services" element={<Services />} />
                 <Route path="/contact" element={<Contactus />} />
               </Routes>
               <Footer />
