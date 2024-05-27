@@ -18,7 +18,7 @@ const Loader = () => {
   return (
     <div className="p-4 space-y-4">
       <div
-        className=" h-48 w-full bg-gray-300 rounded animate-pulse"
+        className=" h-64 w-full bg-gray-300 rounded animate-pulse"
         ref={skeletonRef}
       ></div>
       <div

@@ -2,7 +2,30 @@ import Purple from "../assets/images/PurpleBg.svg";
 import Phone from "../assets/images/phone.svg";
 import BubbleAnimation from "../components/Contact/BubbleAnimation";
 import Contactform from "../components/Contact/Contactform";
+import React, { useRef } from "react";
+import { gsap } from "gsap";
+
 const Contactus = () => {
+  const buttonRef = useRef(null);
+  const bgRef = useRef(null);
+
+  const handleMouseEnter = () => {
+    gsap.to(bgRef.current, {
+      scaleX: 1,
+      transformOrigin: "left",
+      duration: 0.5,
+      ease: "power3.inOut",
+    });
+  };
+
+  const handleMouseLeave = () => {
+    gsap.to(bgRef.current, {
+      scaleX: 0,
+      transformOrigin: "left",
+      duration: 0.5,
+      ease: "power3.inOut",
+    });
+  };
   return (
     <>
       <div className="relative flex flex-col justify-start items-center md:flex-row">
@@ -22,15 +45,22 @@ const Contactus = () => {
           >
             Feel free to reach out to us for any inquiries or questions.
           </p>
-          <div className="relative inline-block">
-            <a
-              href="#contact"
-              className="relative z-10 text-white text-xl text-center font-Lato-Regular border border-red-500 py-4 px-8 rounded-lg overflow-hidden"
-            >
-              Send a message
-            </a>
-            <span className="absolute inset-0 bg-red-500 transition-transform duration-300 transform scale-x-0 origin-left z-0 group-hover:scale-x-100"></span>
-          </div>
+
+          <a
+            href="#contact"
+            className="relative z-10 text-white text-xl text-center font-Lato-Regular border border-Light-Purple  hover:border-Light-Red  py-4 px-8 rounded-lg overflow-hidden"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            ref={buttonRef}
+            data-aos="fade"
+          >
+            <span
+              ref={bgRef}
+              className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-Dark-Purple to-Light-Red transform scale-x-0 rounded-lg"
+              style={{ zIndex: -1 }}
+            ></span>
+            Send a message
+          </a>
         </div>
 
         <div className="background relative z-10 w-full h-screen md:w-auto md:flex-1">
