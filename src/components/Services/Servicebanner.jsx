@@ -1,16 +1,7 @@
 import bannersection from "../../assets/images/Bannersection.svg";
 import Blob2 from "../../assets/images/Blob2.svg";
 const Servicebanner = () => {
-  const banner = [
-    {
-      title: "School Programming Activities",
-      desc: "School programming activities, like coding clubs, hackathons, and competitions, teach coding skills, teamwork, and problem-solving for future tech careers.",
-    },
-    {
-      title: "Web development Activities",
-      desc: "",
-    },
-  ];
+
   return (
     <>
       <div className="relative scroll-smooth">

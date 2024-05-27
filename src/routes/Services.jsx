@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Servicebanner from "../components/Services/Servicebanner";
+import Servicecard from "../components/Services/Servicecards";
 gsap.registerPlugin(ScrollTrigger);
 
 const Services = () => {
@@ -76,6 +77,7 @@ const Services = () => {
         </div>
       </div>
       <Servicebanner />
+      <Servicecard />
     </>
   );
 };
