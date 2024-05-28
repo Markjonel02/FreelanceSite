@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import Blob from "../../assets/images/Blob2.svg";
 import {
   Card,
