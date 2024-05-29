@@ -90,7 +90,7 @@ const InfiniteSlider = () => {
   }, []);
 
   return (
-    <div className="overflow-hidden w-full mb-20">
+    <div className="overflow-hidden w-full h-full mb-20">
       <div ref={sliderRef} className="flex whitespace-nowrap  font-Lato-Light">
         {Img.map((item, index) => (
           <div className="flex whitespace-nowrap font-Lato-Light" key={index}>

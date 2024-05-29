@@ -9,13 +9,14 @@ import Home from "../routes/Home";
 import Contactus from "../routes/Contactus";
 import Footer from "../components/Footer";
 import Services from "../routes/Services";
-import GetApiNews from "./Api/GetApiNew";
+import News from "./Api/News";
 const App = () => {
   const { isLoading } = useLazyContext();
   const Classname = [
-    "bg-blue-gray-50",
+    "bg-gray-50",
+    "overflow-x-hidden",
     "w-full",
-    "h-screen",
+    "h-full",
     "antialiased",
     "scroll-smooth",
     "scrollbar-thin",
@@ -41,7 +42,7 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/contact" element={<Contactus />} />
-                <Route path="/news" element={<GetApiNews />} />
+                <Route path="/news" element={<News />} />
               </Routes>
               <Footer />
             </MainContainer>

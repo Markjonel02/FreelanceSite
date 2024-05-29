@@ -82,7 +82,7 @@ export function NavbarWithMegaMenu() {
   }, []);
 
   return (
-    <nav className="w-full px-4 py-5 border-0 shadow-none sticky top-0 bg-white z-10">
+    <nav className="w-full px-4 py-5 border-0  sticky top-0 bg-white z-10 shadow-sm">
       <div className="flex items-center justify-between w-full text-blue-gray-900">
         <Typography
           as="a"

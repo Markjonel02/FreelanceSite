@@ -48,7 +48,7 @@ const Contactus = () => {
 
           <a
             href="#contact"
-            className="relative z-10 text-white text-xl text-center font-Lato-Regular border border-Light-Purple  hover:border-Light-Red  py-4 px-8 rounded-lg overflow-hidden"
+            className="relative z-10 text-white text-xl text-center font-Lato-Regular border hover:text-Dark-Purple py-4 px-8 rounded-lg overflow-hidden"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             ref={buttonRef}
@@ -56,7 +56,7 @@ const Contactus = () => {
           >
             <span
               ref={bgRef}
-              className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-Dark-Purple to-Light-Red transform scale-x-0 rounded-lg"
+              className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-white to-white  transform scale-x-0 rounded-lg"
               style={{ zIndex: -1 }}
             ></span>
             Send a message
