@@ -9,6 +9,7 @@ import Home from "../routes/Home";
 import Contactus from "../routes/Contactus";
 import Footer from "../components/Footer";
 import Services from "../routes/Services";
+import GetApiNews from "./Api/GetApiNew";
 const App = () => {
   const { isLoading } = useLazyContext();
   const Classname = [
@@ -40,6 +41,7 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/contact" element={<Contactus />} />
+                <Route path="/news" element={<GetApiNews />} />
               </Routes>
               <Footer />
             </MainContainer>

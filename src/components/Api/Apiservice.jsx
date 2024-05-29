@@ -27,3 +27,16 @@ const Apiservice = () => {
 
 export default Apiservice;
  */
+
+import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
+
+export const getArticles = async () => {
+  try {
+    const response = await axios.get(`${API_URL}?_limit=5`);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

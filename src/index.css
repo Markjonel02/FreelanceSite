@@ -61,3 +61,8 @@
   background-size: 400% 100%;
 }
 
+@layer utilities {
+  .grid-cols-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}

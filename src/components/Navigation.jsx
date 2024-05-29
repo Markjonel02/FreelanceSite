@@ -60,7 +60,7 @@ function NavList() {
       </Typography>
       <Typography
         as={Link}
-        to=""
+        to="/news"
         variant="small"
         color="blue-gray"
         className="font-Lato-Bold"
