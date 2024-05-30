@@ -1,5 +1,15 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Masonry } from "@mui/lab";
 import { getArticles } from "./Apiservice";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Button,
+  Container,
+  CircularProgress,
+} from "@mui/material";
 
 const News = () => {
   const [articles, setArticles] = useState([]);
@@ -10,7 +20,7 @@ const News = () => {
     const fetchArticles = async () => {
       setLoading(true);
       const data = await getArticles(page);
-      setArticles(data);
+      setArticles((prevArticles) => [...prevArticles, ...data]);
       setLoading(false);
     };
 
@@ -22,39 +32,51 @@ const News = () => {
   };
 
   return (
-    <div className="container mx-auto mt-10">
-      <h2 className="text-2xl font-bold mb-4">Latest News</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ">
+    <Container sx={{ mt: 4 }}>
+      <Typography variant="h4" component="h2" gutterBottom>
+        Latest News
+      </Typography>
+      {loading && <CircularProgress />}
+      <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={2}>
         {articles.map((article, index) => (
-          <div key={index} className="p-4 border rounded-lg shadow">
-            <img
-              src={article.urlToImage}
-              alt={article.title}
-              className="w-96 h-96 mb-4 rounded object-cover"
-            />
-            <h3 className="font-bold text-lg mb-2">{article.title}</h3>
-            <p className="text-gray-700 mb-2">{article.description}</p>
-            <div className="flex items-center justify-between text-sm">
-              <p className="text-gray-600 font-Lato-Black  ">
-                {article.source.name}
-              </p>
-              <p className="text-gray-600">
+          <Card key={index} sx={{ maxWidth: "100%" }}>
+            {article.urlToImage && (
+              <CardMedia
+                component="img"
+                height="200"
+                image={article.urlToImage}
+                alt={article.title}
+              />
+            )}
+            <CardContent>
+              <Typography variant="h6" component="h3">
+                {article.title}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {article.description}
+              </Typography>
+              <Typography variant="caption" color="textSecondary" component="p">
+                {article.source.name} -{" "}
                 {new Date(article.publishedAt).toLocaleDateString()}
-              </p>
-            </div>
-          </div>
+              </Typography>
+            </CardContent>
+          </Card>
         ))}
-      </div>
-      {loading && <p>Loading...</p>}
+      </Masonry>
       {!loading && articles.length >= 15 && (
-        <button
-          onClick={loadMoreArticles}
-          className="bg-blue-500 text-white font-bold py-2 px-4 rounded mt-4"
-        >
-          See More
-        </button>
+        <div className="relative">
+          <div className="bg-black absolute left-0 bottom-0 z-50 "></div>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={loadMoreArticles}
+            sx={{ mt: 4 }}
+          >
+            See More
+          </Button>
+        </div>
       )}
-    </div>
+    </Container>
   );
 };
 
