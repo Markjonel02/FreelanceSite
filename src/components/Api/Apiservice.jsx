@@ -34,7 +34,7 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 export const getArticles = async () => {
   try {
     const response = await axios.get(
-      `https://newsapi.org/v2/everything?q=tesla&from=2024-04-29&sortBy=publishedAt&apiKey=${API_KEY}`
+      `https://newsapi.org/v2/everything?q=tesla&from=2024-04-30&sortBy=publishedAt&apiKey=${API_KEY}`
     );
     console.log(response.data);
     return response.data.articles;
