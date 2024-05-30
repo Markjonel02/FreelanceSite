@@ -8,6 +8,7 @@ import {
   Typography,
   Button,
   Container,
+  CircularProgress,
 } from "@mui/material";
 import { ApiLoaders } from "./ApiLoaders";
 const News = () => {
@@ -51,20 +52,10 @@ const News = () => {
               <Typography variant="h6" component="h3">
                 {article.title}
               </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                className="mt-2"
-              >
+              <Typography variant="body2" color="textSecondary" component="p">
                 {article.description}
               </Typography>
-              <Typography
-                variant="caption"
-                color="textSecondary"
-                component="p"
-                className="mt-2"
-              >
+              <Typography variant="caption" color="textSecondary" component="p">
                 {article.source.name} -{" "}
                 {new Date(article.publishedAt).toLocaleDateString()}
               </Typography>

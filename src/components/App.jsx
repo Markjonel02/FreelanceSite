@@ -33,10 +33,10 @@ const App = () => {
     <>
       {isLoading ? (
         <>
-          <div className="navigation">
-            <NavbarWithMegaMenu />
-          </div>
           <div className="main">
+            <div className="navigation">
+              <NavbarWithMegaMenu />
+            </div>
             <MainContainer className={Classname}>
               <Routes>
                 <Route path="/" element={<Home />} />
