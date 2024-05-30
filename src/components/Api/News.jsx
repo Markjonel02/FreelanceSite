@@ -8,9 +8,8 @@ import {
   Typography,
   Button,
   Container,
-  CircularProgress,
 } from "@mui/material";
-
+import { ApiLoaders } from "./ApiLoaders";
 const News = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -36,7 +35,7 @@ const News = () => {
       <Typography variant="h4" component="h2" gutterBottom>
         Latest News
       </Typography>
-      {loading && <CircularProgress />}
+      {loading && <ApiLoaders />}
       <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={2}>
         {articles.map((article, index) => (
           <Card key={index} sx={{ maxWidth: "100%" }}>
@@ -52,10 +51,20 @@ const News = () => {
               <Typography variant="h6" component="h3">
                 {article.title}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                className="mt-2"
+              >
                 {article.description}
               </Typography>
-              <Typography variant="caption" color="textSecondary" component="p">
+              <Typography
+                variant="caption"
+                color="textSecondary"
+                component="p"
+                className="mt-2"
+              >
                 {article.source.name} -{" "}
                 {new Date(article.publishedAt).toLocaleDateString()}
               </Typography>

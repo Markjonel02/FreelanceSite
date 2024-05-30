@@ -9,6 +9,7 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { PrimeReactProvider } from "primereact/api";
 import { LoadPageProvider } from "./context/LazyContext.jsx";
+import { ThemeProvider } from "@material-tailwind/react";
 const AosInitializer = () => {
   useEffect(() => {
     AOS.init();
@@ -23,7 +24,9 @@ createRoot(document.getElementById("root")).render(
       <PrimeReactProvider>
         <LoadPageProvider>
           <AosInitializer />
+          <ThemeProvider>
           <App />
+          </ThemeProvider>
         </LoadPageProvider>
       </PrimeReactProvider>
     </React.StrictMode>
