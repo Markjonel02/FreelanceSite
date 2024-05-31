@@ -8,7 +8,6 @@ import {
   Typography,
   Button,
   Container,
-  CircularProgress,
 } from "@mui/material";
 import { ApiLoaders } from "./ApiLoaders";
 const News = () => {
