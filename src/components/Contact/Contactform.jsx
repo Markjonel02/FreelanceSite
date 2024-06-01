@@ -6,7 +6,7 @@ const Contactform = () => {
     <>
       <div className="relative ">
         <h2
-          className="text-2xl xl:text-5xl font-Lato-Black mb-4 text-center mt-10 text-Light-Purple2"
+          className="text-2xl xl:text-5xl font-Lato-Black mb-4 text-center mt-10 text-blue-primary"
           data-aos="fade-right"
           data-aos-duration="1000"
         >
@@ -34,7 +34,7 @@ const Contactform = () => {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  fill="#ded3f5ff"
+                  fill="#039be5"
                   className="size-6 me-2"
                 >
                   <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
@@ -51,7 +51,7 @@ const Contactform = () => {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  fill="#ded3f5ff"
+                  fill="#039be5"
                   className="size-6 me-2"
                 >
                   <path
@@ -66,7 +66,7 @@ const Contactform = () => {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  fill="#ded3f5ff"
+                  fill="#039be5"
                   className="size-6 me-2"
                 >
                   <path
@@ -119,7 +119,7 @@ const Contactform = () => {
                 rows={10}
                 className="focus:outline-none focus:ring-0 "
               />
-              <Button className="w-full font-Lato-Medium py-4 text-md bg-Dark-Purple">
+              <Button className="w-full font-Lato-Medium py-4 text-md bg-blue-primary">
                 Submit
               </Button>
             </form>

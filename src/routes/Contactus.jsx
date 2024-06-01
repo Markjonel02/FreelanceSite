@@ -2,6 +2,7 @@ import Purple from "../assets/images/PurpleBg.svg";
 import Phone from "../assets/images/phone.svg";
 import BubbleAnimation from "../components/Contact/BubbleAnimation";
 import Contactform from "../components/Contact/Contactform";
+
 import React, { useRef } from "react";
 import { gsap } from "gsap";
 
@@ -52,7 +53,8 @@ const Contactus = () => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             ref={buttonRef}
-            data-aos="fade"
+            data-aos="fade-right"
+            data-aos-duration="2200"
           >
             <span
               ref={bgRef}

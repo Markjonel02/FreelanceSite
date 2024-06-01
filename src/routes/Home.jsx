@@ -5,7 +5,7 @@ import ParallaxEffect from "../components/Home/ParallaxEffect";
 import AnimatedText from "../components/Home/AnimatedText";
 import Banner from "../components/Home/Banner";
 import ImgSlider from "../components/Home/ImgSlider";
-
+import Blob2 from "../assets/images/Blob2.svg";
 const Home = () => {
   /* change the span color when window width is less than 800 */
   const [windowWidth, setwindowWidth] = useState(window.innerWidth);
@@ -30,6 +30,7 @@ const Home = () => {
         <div className="order-2 md:order-1 text-container w-full md:w-1/2 mb-20 flex xl:justify-center items-center">
           <div className="flex justify-center flex-col text-center md:text-left">
             <div className="text-4xl md:text-5xl lg:text-6xl font-Lato-Black mb-5">
+              <img src={Blob2} alt="" className="absolute right-0 top-0 opacity-30" />
               <h1 data-aos="fade-right" data-aos-duration="1000">
                 Welcome to
               </h1>

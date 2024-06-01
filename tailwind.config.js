@@ -29,7 +29,7 @@ export default withMT(defineConfig({
       colors: {
         'blue-primary': '#039be5',
         'Lighter-Blue': '#d3e8f2ff',
-        'Light-blue': '#C7EEFF',
+        'Light-Blue': '#C7EEFF',
         'Light-pink': '#f5d4d3ff',
         'Light-Red': '#f57d7fff',
         'Light-Orange': '#f5dfd5ff',

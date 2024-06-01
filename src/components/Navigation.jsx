@@ -83,14 +83,14 @@ export function NavbarWithMegaMenu() {
 
   return (
     <nav className="w-full px-4 py-5 border-0  sticky top-0 bg-white z-10 shadow-sm">
-      <div className="flex items-center justify-between w-full text-blue-gray-900">
+      <div className="flex items-center justify-between w-full text-blue-primary">
         <Typography
           as="a"
           href="#"
           variant="h6"
           className="mr-4 px-5 cursor-pointer py-1.5 lg:ml-2 font-Lato-Black text-2xl tracking-wider uppercase "
         >
-          Project<span className="text-blue-primary">Hub</span>
+          Project<span className="text-Dark-primary">Hub</span>
         </Typography>
         <div className="hidden lg:block">
           <NavList />

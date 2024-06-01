@@ -1,16 +1,16 @@
 import design3 from "../assets/images/design3.svg";
 import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger"; // Import ScrollTrigger plugin
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Blob2 from "../assets/images/Blob2.svg";
-gsap.registerPlugin(ScrollTrigger); // Register ScrollTrigger plugin
+import { Faq } from "../components/Faq";
+gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
   const imageRef = useRef(null);
 
   useEffect(() => {
-    gsap.set(imageRef.current, { transformOrigin: "center" }); // Set transform origin to center
-
+    gsap.set(imageRef.current, { transformOrigin: "center" });
     // Define the scroll-based animation
     gsap.to(imageRef.current, {
       scale: 1.3,
@@ -18,7 +18,7 @@ const About = () => {
         trigger: imageRef.current,
         start: "top center",
         end: "bottom center",
-        scrub: true, // Smoothly animate as you scroll
+        scrub: true,
       },
     });
   }, []);
@@ -62,6 +62,8 @@ const About = () => {
           </div>
         </div>
       </div>
+
+      <Faq />
     </>
   );
 };
