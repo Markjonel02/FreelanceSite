@@ -1,7 +1,6 @@
 import bannersection from "../../assets/images/Bannersection.svg";
 import Blob2 from "../../assets/images/Blob2.svg";
 const Servicebanner = () => {
-
   return (
     <>
       <div className="relative scroll-smooth">

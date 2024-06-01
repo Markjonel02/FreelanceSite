@@ -49,7 +49,7 @@ function NavList() {
 
       <Typography
         as={Link}
-        to=""
+        to="/about"
         variant="small"
         color="blue-gray"
         className="font-Lato-Bold"

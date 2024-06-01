@@ -9,7 +9,8 @@ import Home from "../routes/Home";
 import Contactus from "../routes/Contactus";
 import Footer from "../components/Footer";
 import Services from "../routes/Services";
-import News from "./Api/News";
+/* import News from "./Api/News"; */
+import About from "../routes/About";
 const App = () => {
   const { isLoading } = useLazyContext();
   const Classname = [
@@ -42,7 +43,8 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/contact" element={<Contactus />} />
-                <Route path="/news" element={<News />} />
+                {/*     <Route path="/news" element={<News />} /> */}
+                <Route path="/about" element={<About />} />
               </Routes>
               <Footer />
             </MainContainer>

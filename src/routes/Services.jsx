@@ -38,7 +38,7 @@ const Services = () => {
         >
           <div className="flex flex-col  ">
             <h1
-              className="text-blue-primary text-3xl xl:text-8xl md:text-5xl"
+              className="text-blue-primary text-3xl xl:text-8xl md:text-5xl "
               data-aos="fade-up"
               data-aos-duration="1000"
             >
