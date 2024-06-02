@@ -1,10 +1,13 @@
 import { Input } from "@material-tailwind/react";
 import { Textarea } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
+import Blob2 from "../../assets/images/Blob2.svg";
 const Contactform = () => {
   return (
     <>
       <div className="relative ">
+        {" "}
+        <img src={Blob2} alt="" className="absolute opacity-25 right-10" />
         <h2
           className="text-2xl xl:text-5xl font-Lato-Black mb-4 text-center mt-10 text-blue-primary"
           data-aos="fade-right"

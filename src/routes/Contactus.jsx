@@ -2,7 +2,7 @@ import Purple from "../assets/images/PurpleBg.svg";
 import Phone from "../assets/images/phone.svg";
 import BubbleAnimation from "../components/Contact/BubbleAnimation";
 import Contactform from "../components/Contact/Contactform";
-
+import Blob2 from "../assets/images/Blob2.svg";
 import React, { useRef } from "react";
 import { gsap } from "gsap";
 
@@ -30,9 +30,17 @@ const Contactus = () => {
   return (
     <>
       <div className="relative flex flex-col justify-start items-center md:flex-row">
-        <div className="lefttext absolute z-50 mx-8   text-center md:text-left md:order-1">
+        <div className="flex top-0 left-0">
+          <img
+            src={Blob2}
+            alt=""
+            className="absolute opacity-25  w-[700px]  top-0 left-0 "
+          />
+        </div>
+
+        <div className=" absolute z-50 mx-8   text-center md:text-left md:order-1">
           <h1
-            className="text-3xl xl:text-7xl md:text-6xl sm:text-4xl font-Lato-Black top text-white "
+            className="text-3xl xl:text-7xl md:text-6xl sm:text-4xl font-Lato-Black top text-blue-primary"
             data-aos="fade-right"
             data-aos-duration="1800"
             data-aos-offset="300"
@@ -40,7 +48,7 @@ const Contactus = () => {
             Contact Us
           </h1>
           <p
-            className="mt-2 text-xl xl:text-2xl font-Lato-Light text-white mb-8"
+            className="mt-2 text-xl xl:text-2xl font-Lato-Light text-blue-primary mb-8"
             data-aos="fade-right"
             data-aos-duration="2200"
           >
@@ -49,7 +57,7 @@ const Contactus = () => {
 
           <a
             href="#contact"
-            className="relative z-10 text-white text-xl text-center font-Lato-Regular border hover:text-Dark-Purple py-4 px-8 rounded-lg overflow-hidden"
+            className="relative z-10 text-blue-primary text-xl text-center font-Lato-Regular border border-blue-primary hover:text-white py-4 px-8 rounded-lg overflow-hidden"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             ref={buttonRef}
@@ -58,16 +66,13 @@ const Contactus = () => {
           >
             <span
               ref={bgRef}
-              className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-white to-white  transform scale-x-0 rounded-lg"
+              className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-primary to-blue-primary  transform scale-x-0 rounded-lg"
               style={{ zIndex: -1 }}
             ></span>
             Send a message
           </a>
         </div>
-
-        <div className="background relative z-10 w-full h-screen md:w-auto md:flex-1">
-          <img src={Purple} alt="" className="object-cover w-full h-full" />
-        </div>
+        <div className="background relative z-10 w-full h-screen md:w-auto md:flex-1"></div>
         <div
           className="right-elem absolute flex justify-center items-center top-20 right-0 z-20 md:order-2"
           data-aos="fade-up"
@@ -75,6 +80,11 @@ const Contactus = () => {
           data-aos-offset="300"
         >
           <BubbleAnimation />
+          <img
+            src={Blob2}
+            alt="gradient"
+            className="absolute opacity-40 right-0"
+          />
           <img
             src={Phone}
             alt="Phone"
