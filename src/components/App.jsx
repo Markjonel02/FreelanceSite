@@ -11,6 +11,8 @@ import Footer from "../components/Footer";
 import Services from "../routes/Services";
 /* import News from "./Api/News"; */
 import About from "../routes/About";
+import { Nopage } from "./404/Nopage";
+
 const App = () => {
   const { isLoading } = useLazyContext();
   const Classname = [
@@ -45,6 +47,7 @@ const App = () => {
                 <Route path="/contact" element={<Contactus />} />
                 {/*     <Route path="/news" element={<News />} /> */}
                 <Route path="/about" element={<About />} />
+                <Route path="*" element={<Nopage />} />
               </Routes>
               <Footer />
             </MainContainer>

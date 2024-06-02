@@ -25,7 +25,7 @@ createRoot(document.getElementById("root")).render(
         <LoadPageProvider>
           <AosInitializer />
           <ThemeProvider>
-          <App />
+            <App />
           </ThemeProvider>
         </LoadPageProvider>
       </PrimeReactProvider>

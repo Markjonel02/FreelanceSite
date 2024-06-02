@@ -6,6 +6,8 @@ import AnimatedText from "../components/Home/AnimatedText";
 import Banner from "../components/Home/Banner";
 import ImgSlider from "../components/Home/ImgSlider";
 import Blob2 from "../assets/images/Blob2.svg";
+import { Ripple } from "primereact/ripple";
+
 const Home = () => {
   /* change the span color when window width is less than 800 */
   const [windowWidth, setwindowWidth] = useState(window.innerWidth);
@@ -30,7 +32,11 @@ const Home = () => {
         <div className="order-2 md:order-1 text-container w-full md:w-1/2 mb-20 flex xl:justify-center items-center">
           <div className="flex justify-center flex-col text-center md:text-left">
             <div className="text-4xl md:text-5xl lg:text-6xl font-Lato-Black mb-5">
-              <img src={Blob2} alt="" className="absolute right-0 top-0 opacity-30" />
+              <img
+                src={Blob2}
+                alt=""
+                className="absolute right-0 top-0 opacity-25"
+              />
               <h1 data-aos="fade-right" data-aos-duration="1000">
                 Welcome to
               </h1>
@@ -61,14 +67,15 @@ const Home = () => {
                 Let{"'"}s make your projects happen
               </p>
             </div>
-            <div className="relative">
+            <div className="relative p-ripple">
               <button
-                className="p-ripple border  border-blue-primary px-10 py-4 rounded-lg font-Lato-Regular text-xl hover:bg-blue-primary hover:text-Light-secondary "
+                className=" border  border-blue-primary px-10 py-4 rounded-lg font-Lato-Regular text-xl hover:bg-blue-primary hover:text-Light-secondary "
                 data-aos="fade-right"
                 data-aos-duration="2500"
               >
                 Get Started
-              </button>{" "}
+                <Ripple />
+              </button>
             </div>
           </div>
         </div>
