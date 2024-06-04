@@ -45,14 +45,7 @@ const Home = () => {
                 data-aos="fade-right"
                 data-aos-duration="1500"
               >
-                Project{" "}
-                <span
-                  className={SelectedSpancolor}
-                  data-aos="fade-right"
-                  data-aos-duration="1500"
-                >
-                  Hub
-                </span>
+                Project <span className={SelectedSpancolor}>Hub</span>
               </span>
             </div>
             <div

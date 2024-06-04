@@ -41,7 +41,7 @@ const About = () => {
           >
             Welcome to
             <span className="block text-blue-primary text-3xl sm:text-5xl lg:text-7xl md:text-6xl">
-              Project <span className="text-Dark-primary">Hub.</span>
+              Project <span className="text-dark-primary">Hub.</span>
             </span>
             <span className="block text-lg sm:text-xl lg:text-2xl text-black mt-3 font-Lato-Light">
               Launchpad for project excellence. Empowering teams to thrive.

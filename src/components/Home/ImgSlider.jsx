@@ -15,7 +15,7 @@ import Html from "../../assets/images/file_type_html_icon_130541.svg";
 import jquery from "../../assets/images/jquery_original_wordmark_logo_icon_146447.svg";
 import Tailwind from "../../assets/images/tailwindcss_logo_icon_167923.svg";
 import Vuejs from "../../assets/images/vuejs_original_wordmark_logo_icon_146305.svg";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import {
   Card,
   CardHeader,
@@ -24,7 +24,7 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
-import "swiper/css/pagination";
+import "swiper/css/navigation";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
@@ -167,8 +167,9 @@ const ImgSlider = () => {
       <Swiper
         ref={swiperRef}
         breakpoints={breakpoints}
-        modules={[Autoplay, Pagination]}
+        modules={[Autoplay, Navigation]}
         pagination={{ clickable: true }}
+        navigation={true}
         autoplay={{ delay: 1500, disableOnInteraction: false }}
         grabCursor={true}
         className="flex justify-center items-center mb-10 p-5 w-full h-auto py-12"
