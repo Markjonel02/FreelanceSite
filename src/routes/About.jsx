@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Blob2 from "../assets/images/Blob2.svg";
 import { Faq } from "../components/Faq";
+import Aboutsection from "../components/About/Aboutsection";
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
@@ -40,7 +41,7 @@ const About = () => {
           >
             Welcome to
             <span className="block text-blue-primary text-3xl sm:text-5xl lg:text-7xl md:text-6xl">
-              Project <span className="text-black">Hub.</span>
+              Project <span className="text-Dark-primary">Hub.</span>
             </span>
             <span className="block text-lg sm:text-xl lg:text-2xl text-black mt-3 font-Lato-Light">
               Launchpad for project excellence. Empowering teams to thrive.
@@ -62,7 +63,7 @@ const About = () => {
           </div>
         </div>
       </div>
-
+      <Aboutsection />
       <Faq />
     </>
   );

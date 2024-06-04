@@ -9,33 +9,20 @@ export const Nopage = () => {
   const animal1Ref = useRef(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({
-      repeat: -1,
-      repeatDelay: 0.5, // Adding a brief delay for a smoother loop
-      paused: true,
-    });
+    const animateAnimal = () => {
+      const tl = gsap.timeline({
+        repeat: -1,
+        repeatDelay: 0.5, //  delay for a smoother loop
+      });
 
-    tl.set(animal1Ref.current, { x: "-100vw" }).to(animal1Ref.current, {
-      x: "100vw",
-      duration: 40, // Slower animation
-      ease: "power2.inOut", // Smoother easing
-    });
-
-    // Start the animation
-    tl.play();
-
-    const handleMouseEnter = () => tl.pause();
-    const handleMouseLeave = () => tl.play();
-
-    const animal1Elem = animal1Ref.current;
-    animal1Elem.addEventListener("mouseenter", handleMouseEnter);
-    animal1Elem.addEventListener("mouseleave", handleMouseLeave);
-
-    // Cleanup event listeners on component unmount
-    return () => {
-      animal1Elem.removeEventListener("mouseenter", handleMouseEnter);
-      animal1Elem.removeEventListener("mouseleave", handleMouseLeave);
+      tl.set(animal1Ref.current, { x: "-100vw" }).to(animal1Ref.current, {
+        x: "100vw",
+        duration: 30, // Slower animation
+        ease: "power2.inOut", // Smoother easing
+      });
     };
+
+    animateAnimal();
   }, []);
 
   return (

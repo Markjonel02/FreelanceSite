@@ -29,7 +29,6 @@ const Services = () => {
           <video autoPlay loop muted className="object-cover w-full h-screen">
             <source src={video} type="video/mp4" />
           </video>{" "}
-          <div className="absolute top-0 left-0 w-1/2 h-full bg-black opacity-20 blur-sm"></div>
         </div>
 
         <div
