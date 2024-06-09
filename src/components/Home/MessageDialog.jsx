@@ -1,110 +1,103 @@
+import { useState } from "react";
+import { HiPaperAirplane } from "react-icons/hi";
+
 const MessageDialog = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [messages, setMessages] = useState([
+    { text: "Hello! How can I help you?", from: "agent" },
+    { text: "I have a question about your services.", from: "user" },
+    { text: "Sure, feel free to ask!", from: "agent" },
+  ]);
+  const [newMessage, setNewMessage] = useState("");
+
+  const toggleChat = () => {
+    setIsVisible(!isVisible);
+  };
+
+  const handleSend = (e) => {
+    e.preventDefault();
+    if (newMessage.trim() !== "") {
+      setMessages([...messages, { text: newMessage, from: "user" }]);
+      setNewMessage("");
+    }
+  };
+
+  const splitMessage = (msg) => {
+    const words = msg.split(" ");
+    const chunks = [];
+    for (let i = 0; i < words.length; i += 5) {
+      chunks.push(words.slice(i, i + 5).join(" "));
+    }
+    return chunks;
+  };
+
   return (
-    <div>
-      <button
-        className="select-none rounded-lg bg-gray-900 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-        type="button"
-        data-dialog-target="sign-in-dialog"
-      >
-        Sign In
-      </button>
-      <div
-        data-dialog-backdrop="sign-in-dialog"
-        data-dialog-backdrop-close="true"
-        className="pointer-events-none fixed inset-0 z-[999] grid h-screen w-screen place-items-center bg-black bg-opacity-60 opacity-0 backdrop-blur-sm transition-opacity duration-300"
-      >
-        <div
-          data-dialog="sign-in-dialog"
-          className="relative mx-auto flex w-full max-w-[24rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md"
+    <>
+      <div className="relative">
+        <button
+          onClick={toggleChat}
+          className="fixed bottom-20 right-4 bg-blue-500 text-white p-3 z-20 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none"
         >
-          <div className="flex flex-col gap-4 p-6">
-            <h4 className="block font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
-              Sign In
-            </h4>
-            <p className="block mb-3 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
-              Enter your email and password to Sign In.
-            </p>
-            <h6 className="block -mb-2 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-inherit">
-              Your Email
-            </h6>
-            <div className="relative h-11 w-full min-w-[200px]">
-              <input
-                className="w-full h-full px-3 py-3 font-sans text-sm font-normal transition-all bg-transparent border rounded-md peer border-blue-gray-200 border-t-transparent text-blue-gray-700 outline outline-0 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-                placeholder=" "
-              />
-              <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.1] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-gray-900 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-gray-900 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                Email
-              </label>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"
+            />
+          </svg>
+        </button>
+
+        {isVisible && (
+          <div className="fixed bottom-36 z-20 right-10 w-80 p-4 bg-white shadow-lg bg-opacity-90 backdrop-blur-lg rounded-lg border border-gray-300">
+            <div className="flex flex-col space-y-2 h-64 overflow-y-auto">
+              {messages.map((msg, index) => {
+                const chunks = splitMessage(msg.text);
+                return (
+                  <div
+                    key={index}
+                    className={`${
+                      msg.from === "user"
+                        ? "self-start bg-gray-200"
+                        : "self-end bg-blue-500 text-white"
+                    } p-2 rounded-lg max-w-xs`}
+                  >
+                    {chunks.map((chunk, idx) => (
+                      <p key={idx} className="flex flex-wrap">
+                        {chunk}
+                      </p>
+                    ))}
+                  </div>
+                );
+              })}
             </div>
-            <h6 className="block -mb-2 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-inherit">
-              Your Password
-            </h6>
-            <div className="relative h-11 w-full min-w-[200px]">
-              <input
-                className="w-full h-full px-3 py-3 font-sans text-sm font-normal transition-all bg-transparent border rounded-md peer border-blue-gray-200 border-t-transparent text-blue-gray-700 outline outline-0 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-                placeholder=" "
-              />
-              <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.1] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-gray-900 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-gray-900 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                Password
-              </label>
-            </div>
-            <div className="-ml-2.5 -mt-3">
-              <div className="inline-flex items-center">
-                <label
-                  className="relative flex items-center p-3 rounded-full cursor-pointer"
-                  htmlFor="remember"
+            <div className="mt-4">
+              <form onSubmit={handleSend} className="flex items-center">
+                <textarea
+                  value={newMessage}
+                  onChange={(e) => setNewMessage(e.target.value)}
+                  placeholder="Type a message..."
+                  className="border w-full rounded-lg border-gray-300 focus:border-blue-500 p-2 resize-none"
+                  rows="2"
+                ></textarea>
+                <button
+                  type="submit"
+                  className="ml-2 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 focus:outline-none"
                 >
-                  <input
-                    type="checkbox"
-                    className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:bg-gray-900 checked:before:bg-gray-900 hover:before:opacity-10"
-                    id="remember"
-                  />
-                  <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-3.5 w-3.5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      stroke="currentColor"
-                      strokeWidth="1"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                  </span>
-                </label>
-                <label
-                  className="mt-px font-light text-gray-700 cursor-pointer select-none"
-                  htmlFor="remember"
-                >
-                  Remember Me
-                </label>
-              </div>
+                  <HiPaperAirplane />
+                </button>
+              </form>
             </div>
           </div>
-          <div className="p-6 pt-0">
-            <button
-              className="block w-full select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-              type="button"
-            >
-              Sign In
-            </button>
-            <p className="flex justify-center mt-4 font-sans text-sm antialiased font-light leading-normal text-inherit">
-              Don&apos;t have an account?
-              <a
-                href="#signup"
-                className="block ml-1 font-sans text-sm antialiased font-bold leading-normal text-blue-gray-900"
-              >
-                Sign up
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>{" "}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 

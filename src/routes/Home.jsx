@@ -7,7 +7,7 @@ import Banner from "../components/Home/Banner";
 import ImgSlider from "../components/Home/ImgSlider";
 import Blob2 from "../assets/images/Blob2.svg";
 import { Ripple } from "primereact/ripple";
-
+import MessageDialog from "../components/Home/MessageDialog";
 const Home = () => {
   /* change the span color when window width is less than 800 */
   const [windowWidth, setwindowWidth] = useState(window.innerWidth);
@@ -102,6 +102,7 @@ const Home = () => {
       <Banner />
       <ParallaxEffect />
       <ImgSlider />
+      <MessageDialog></MessageDialog>
     </>
   );
 };
