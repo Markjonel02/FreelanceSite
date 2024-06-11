@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { Link } from "react-router-dom";
 import {
   Collapse,
@@ -82,7 +81,7 @@ export function NavbarWithMegaMenu() {
   }, []);
 
   return (
-    <nav className="w-full px-4 py-5 border-0  sticky top-0 bg-white z-10 shadow-sm">
+    <nav className="w-full px-4 py-5 border-0 sticky top-0 bg-white z-10 shadow-sm">
       <div className="flex items-center justify-between w-full text-blue-primary">
         <Typography
           as="a"
@@ -94,6 +93,20 @@ export function NavbarWithMegaMenu() {
         </Typography>
         <div className="hidden lg:block">
           <NavList />
+        </div>
+
+        <div className="hidden lg:flex items-center gap-2">
+          <Button
+            variant="outlined"
+            size="sm"
+            color="blue-gray"
+            className="mr-2"
+          >
+            Log In
+          </Button>
+          {/*  <Button variant="gradient" size="sm">
+            Sign Up
+          </Button> */}
         </div>
 
         <IconButton
@@ -120,9 +133,6 @@ export function NavbarWithMegaMenu() {
             className=""
           >
             Log In
-          </Button>
-          <Button variant="gradient" size="sm" fullWidth>
-            Sign In
           </Button>
         </div>
       </Collapse>
