@@ -1,32 +1,78 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { HiPaperAirplane } from "react-icons/hi";
+import { collection, addDoc, query, onSnapshot } from "firebase/firestore";
+import { db, auth } from "../../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 const MessageDialog = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [messages, setMessages] = useState([
-    { text: "Hello! How can I help you?", from: "agent" },
-    { text: "I have a question about your services.", from: "user" },
-    { text: "Sure, feel free to ask!", from: "agent" },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [user, setUser] = useState(null);
+  const [showTimestamp, setShowTimestamp] = useState(false); // State for showing timestamp
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+      setUser(authUser);
+      if (authUser) {
+        const q = query(collection(db, "messages"));
+        onSnapshot(q, (snapshot) => {
+          const msgs = snapshot.docs
+            .map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }))
+            .sort((a, b) => a.createdAt - b.createdAt); // Sort by createdAt in ascending order
+
+          setMessages(msgs);
+          setShowTimestamp(msgs.length === 0); // Show timestamp only if no messages
+          scrollToBottom();
+        });
+      } else {
+        resetDialog();
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const toggleChat = () => {
     setIsVisible(!isVisible);
   };
 
-  const handleSend = (e) => {
+  const handleSend = async (e) => {
     e.preventDefault();
     if (newMessage.trim() !== "") {
-      setMessages([...messages, { text: newMessage, from: "user" }]);
+      await addDoc(collection(db, "messages"), {
+        text: newMessage,
+        from: user.email,
+        uid: user.uid,
+        createdAt: new Date(), // Include timestamp when the message is sent
+      });
       setNewMessage("");
+      setShowTimestamp(false); // Hide timestamp after sending a message
     }
   };
 
+  const resetDialog = () => {
+    setMessages([]);
+    setNewMessage("");
+    setIsVisible(false);
+    setShowTimestamp(true); // Show timestamp when resetting dialog
+  };
+
   const splitMessage = (msg) => {
-    const words = msg.split(" ");
     const chunks = [];
-    for (let i = 0; i < words.length; i += 5) {
-      chunks.push(words.slice(i, i + 5).join(" "));
+    let remainingText = msg.trim();
+    while (remainingText.length > 0) {
+      const chunk = remainingText.substring(0, 20);
+      chunks.push(chunk);
+      remainingText = remainingText.substring(chunk.length).trim();
     }
     return chunks;
   };
@@ -55,46 +101,58 @@ const MessageDialog = () => {
         </button>
 
         {isVisible && (
-          <div className="fixed bottom-36 z-20 right-10 w-80 p-4 bg-white shadow-lg bg-opacity-90 backdrop-blur-lg rounded-lg border border-gray-300">
-            <div className="flex flex-col space-y-2 h-64 overflow-y-auto">
-              {messages.map((msg, index) => {
-                const chunks = splitMessage(msg.text);
-                return (
-                  <div
-                    key={index}
-                    className={`${
-                      msg.from === "user"
-                        ? "self-start bg-gray-200"
-                        : "self-end bg-blue-500 text-white"
-                    } p-2 rounded-lg max-w-xs`}
-                  >
-                    {chunks.map((chunk, idx) => (
-                      <p key={idx} className="flex flex-wrap">
-                        {chunk}
-                      </p>
-                    ))}
+          <>
+            <div className="fixed bottom-36 z-20 right-10 w-80 p-4 bg-white shadow-lg bg-opacity-90 backdrop-blur-lg rounded-lg border border-gray-300">
+              <div className="flex flex-col space-y-2 h-64 overflow-y-auto">
+                <div className="relative header bg-blue-primary w-full"></div>
+                {showTimestamp && (
+                  <div className="text-xs text-gray-500 mt-2">
+                    Last updated: {new Date().toLocaleString()}
                   </div>
-                );
-              })}
+                )}
+                {messages.map((msg) => {
+                  const chunks = splitMessage(msg.text);
+                  const isCurrentUser = user && msg.uid === user.uid;
+
+                  return (
+                    <div
+                      key={msg.id}
+                      className={`${
+                        isCurrentUser
+                          ? "self-end bg-blue-500 text-white"
+                          : "self-start bg-gray-200"
+                      } p-2 rounded-lg max-w-xs`}
+                    >
+                      {chunks.map((chunk, idx) => (
+                        <p key={idx} className="flex flex-wrap">
+                          {chunk}
+                        </p>
+                      ))}
+                    </div>
+                  );
+                })}
+                <div ref={messagesEndRef} />
+              </div>
+              <div className="mt-4">
+                <form onSubmit={handleSend} className="flex items-center">
+                  <textarea
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    placeholder="Type a message..."
+                    className="border w-full rounded-lg border-gray-300 focus:border-blue-500 p-2 resize-none"
+                    rows="2"
+                  ></textarea>
+                  <button
+                    type="submit"
+                    className="ml-2 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 focus:outline-none"
+                    disabled={!newMessage.trim()}
+                  >
+                    <HiPaperAirplane />
+                  </button>
+                </form>
+              </div>
             </div>
-            <div className="mt-4">
-              <form onSubmit={handleSend} className="flex items-center">
-                <textarea
-                  value={newMessage}
-                  onChange={(e) => setNewMessage(e.target.value)}
-                  placeholder="Type a message..."
-                  className="border w-full rounded-lg border-gray-300 focus:border-blue-500 p-2 resize-none"
-                  rows="2"
-                ></textarea>
-                <button
-                  type="submit"
-                  className="ml-2 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 focus:outline-none"
-                >
-                  <HiPaperAirplane />
-                </button>
-              </form>
-            </div>
-          </div>
+          </>
         )}
       </div>
     </>

@@ -5,13 +5,21 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
+const APIKEY = import.meta.env.VITE_API_KEY;
+const APP_ID = import.meta.env.VITE_APP_ID;
+const PROJECT_ID = import.meta.env.VITE_PROJECT_ID;
+const AUTHDOMAIN = import.meta.env.VITE_AUTHDOMAIN;
+const STORAGEBUCKET = import.meta.env.VITE_STORAGEBUCKET;
+const MESSAGINGSENDER_ID = import.meta.env.VITE_MESSAGINGSENDER_ID;
+/* const MEASUREMENT_ID = import.meta.env.VITE_MEASUREMENT_ID; */
+
 const firebaseConfig = {
-  apiKey: REACT_APP_API_KEY_GOES_HERE,
-  authDomain: REACT_APP_AUTH_DOMAIN_GOES_HERE,
-  projectId: REACT_APP_PROJECT_ID_GOES_HERE,
-  storageBucket: REACT_APP_STORAGE_BUCKET_GOES_HERE,
-  messagingSenderId: REACT_APP_MESSSAGING_SENDER_ID_GOES_HERE,
-  appId: REACT_APP_APP_ID_GOES_HERE,
+  apiKey: APIKEY,
+  authDomain:AUTHDOMAIN,
+  projectId: PROJECT_ID,
+  storageBucket:STORAGEBUCKET,
+  messagingSenderId:MESSAGINGSENDER_ID, 
+  appId: APP_ID,
 };
 
 
@@ -19,3 +27,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+/* export const timestamp = firebase.firestore.FieldValue.serverTimestamp(); */
