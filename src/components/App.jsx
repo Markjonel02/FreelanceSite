@@ -1,21 +1,39 @@
+import React, { useEffect, useState } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { auth } from "../firebase"; // Import your initialized Firebase auth
+
 import NavbarWithMegaMenu from "./Navigation";
 import MainContainer from "./MainContainer";
-import { Routes, Route, useLocation } from "react-router-dom";
-import { useEffect } from "react";
 import BacktoTop from "./Home/BacktoTop";
 import Loader from "./Home/Loader";
-import { useLazyContext } from "../context/LazyContext";
 import Home from "../routes/Home";
 import Contactus from "../routes/Contactus";
 import Footer from "../components/Footer";
 import Services from "../routes/Services";
-/* import News from "./Api/News"; */
 import About from "../routes/About";
+import Inquiries from "../routes/Inquiries";
+
 import { Nopage } from "./404/Nopage";
 
 const App = () => {
-  const { isLoading } = useLazyContext();
-  const Classname = [
+  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user); // Set the user object
+      } else {
+        setUser(null); // No user signed in
+      }
+      setIsLoading(false); // Done loading
+    });
+
+    return () => unsubscribe(); // Cleanup on unmount
+  }, []);
+
+  const classNames = [
     "bg-gray-50",
     "overflow-x-hidden",
     "w-full",
@@ -26,40 +44,36 @@ const App = () => {
     "scrollbar-thumb-transparent",
   ].join(" ");
 
-  const { pathname } = useLocation();
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
-    <>
-      {isLoading ? (
-        <>
-          <div className="main">
-            <div className="navigation">
-              <NavbarWithMegaMenu />
-            </div>
-            <MainContainer className={Classname}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/contact" element={<Contactus />} />
-                {/*     <Route path="/news" element={<News />} /> */}
-                <Route path="/about" element={<About />} />
-                <Route path="*" element={<Nopage />} />
-              </Routes>
-              <Footer />
-            </MainContainer>
-          </div>
-          <BacktoTop />
-        </>
-      ) : (
-        <>
-          <Loader />
-        </>
-      )}
-    </>
+    <div className="main">
+      <div className="navigation">
+        <NavbarWithMegaMenu />
+      </div>
+      <MainContainer className={classNames}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/contact" element={<Contactus />} />
+          <Route path="/about" element={<About />} />
+          {user && user.email === "itsmepiglet05@gmail.com" ? (
+            <Route path="/inquiries" element={<Inquiries />} />
+          ) : (
+            <Route path="/inquiries" element={<Nopage />} />
+          )}
+          <Route path="*" element={<Nopage />} />
+        </Routes>
+        <Footer />
+      </MainContainer>
+      <BacktoTop />
+    </div>
   );
 };
 

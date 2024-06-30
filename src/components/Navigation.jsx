@@ -13,7 +13,7 @@ import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
-function NavList() {
+function NavList({ isAdmin }) {
   return (
     <List className="mx-5 mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
       <Typography
@@ -67,6 +67,19 @@ function NavList() {
       >
         <ListItem className="flex items-center gap-2 py-2 pr-4">News</ListItem>
       </Typography>
+      {isAdmin && (
+        <Typography
+          as={Link}
+          to="/inquiries"
+          variant="small"
+          color="blue-gray"
+          className="font-Lato-Bold"
+        >
+          <ListItem className="flex items-center gap-2 py-2 pr-4">
+            Inquiries
+          </ListItem>
+        </Typography>
+      )}
     </List>
   );
 }
@@ -100,6 +113,8 @@ export function NavbarWithMegaMenu() {
     setDropdownOpen(false);
   };
 
+  const isAdmin = user?.email === "itsmepiglet05@gmail.com";
+
   return (
     <nav className="w-full px-4 py-5 border-0 sticky top-0 bg-white z-10 shadow-sm">
       <div className="flex items-center justify-between w-full text-blue-primary">
@@ -112,7 +127,7 @@ export function NavbarWithMegaMenu() {
           Project<span className="text-Dark-primary">Hub</span>
         </Typography>
         <div className="hidden lg:block">
-          <NavList />
+          <NavList isAdmin={isAdmin} />
         </div>
 
         <div className="hidden lg:flex items-center gap-2">
@@ -137,7 +152,11 @@ export function NavbarWithMegaMenu() {
                     color="blue-gray"
                     fullWidth
                     className="hover:bg-gray-500 hover:text-white"
-                    onClick={() => auth.signOut()}
+                    onClick={() => {
+                      auth.signOut().then(() => {
+                        window.location.reload();
+                      });
+                    }}
                   >
                     Log Out
                   </Button>
@@ -171,7 +190,7 @@ export function NavbarWithMegaMenu() {
         </IconButton>
       </div>
       <Collapse open={openNav}>
-        <NavList />
+        <NavList isAdmin={isAdmin} />
         <div className="flex w-full font-flex-nowrap items-center gap-2 lg:hidden">
           {user && !loading ? (
             <button
