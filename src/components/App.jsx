@@ -12,22 +12,17 @@ import Footer from "../components/Footer";
 import Services from "../routes/Services";
 import About from "../routes/About";
 import Inquiries from "../routes/Inquiries";
-
 import { Nopage } from "./404/Nopage";
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
   const { pathname } = useLocation();
+  const [isLoading, setIsLoading] = useState(true); // State to manage loading state
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user); // Set the user object
-      } else {
-        setUser(null); // No user signed in
-      }
-      setIsLoading(false); // Done loading
+      setUser(user); // Set the user object whether user exists or not
+      setIsLoading(false); // Mark loading as complete once auth state is resolved
     });
 
     return () => unsubscribe(); // Cleanup on unmount
@@ -49,7 +44,7 @@ const App = () => {
   }, [pathname]);
 
   if (isLoading) {
-    return <Loader />;
+    return <Loader />; // Show loader while authenticating
   }
 
   return (

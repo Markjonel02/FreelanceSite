@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
+import {
+  collection,
+  query,
+  onSnapshot,
+  orderBy,
+  where,
+} from "firebase/firestore";
 import { db, auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -11,15 +17,35 @@ const Inquiries = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
-      if (authUser && authUser.email === "admin@example.com") {
-        // Change to your admin email
-        const q = query(collection(db, "users"), orderBy("createdAt"));
-        onSnapshot(q, (snapshot) => {
+      if (authUser && authUser.email === "itsmepiglet05@gmail.com") {
+        const usersRef = collection(db, "users");
+        const messagesRef = collection(db, "messages");
+
+        // Fetch all users
+        onSnapshot(usersRef, (snapshot) => {
           const userData = snapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
           }));
           setUsers(userData);
+        });
+
+        // Fetch messages where the admin is involved
+        const q = query(
+          messagesRef,
+          orderBy("createdAt"),
+          where("from", "==", authUser.email).orWhere(
+            "to",
+            "==",
+            authUser.email
+          )
+        );
+        onSnapshot(q, (snapshot) => {
+          const messagesData = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setConversations(messagesData);
         });
       }
     });
@@ -29,14 +55,20 @@ const Inquiries = () => {
 
   const handleUserClick = (user) => {
     setSelectedUser(user);
-    const q = query(collection(db, "messages"), orderBy("createdAt"));
+
+    // Fetch messages where either the admin or the selected user is involved
+    const q = query(
+      collection(db, "messages"),
+      orderBy("createdAt"),
+      where("from", "in", ["itsmepiglet05@gmail.com", user.email]),
+      where("to", "in", ["itsmepiglet05@gmail.com", user.email])
+    );
+
     onSnapshot(q, (snapshot) => {
-      const messagesData = snapshot.docs
-        .map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-        .filter((msg) => msg.from === user.email || msg.to === user.email);
+      const messagesData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setConversations(messagesData);
     });
   };
@@ -44,7 +76,7 @@ const Inquiries = () => {
   const handleMessageSend = () => {
     if (selectedUser && messageInput.trim() !== "") {
       const message = {
-        from: "admin@example.com", // Change to admin's email
+        from: "itsmepiglet05@gmail.com", // admin's email
         to: selectedUser.email,
         text: messageInput,
         createdAt: new Date(),
@@ -62,8 +94,10 @@ const Inquiries = () => {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl mb-4">User Inquiries</h1>
+    <div className="p-4 w-full h-screen">
+      <h1 className="text-2xl mb-4 text-center bg-blue-primary p-4 rounded xl:text-2xl lg:text-xl sm:text-sm font-Lato-Bold tracking-wider text-white">
+        User Inquiries
+      </h1>
       <div className="flex">
         <div className="w-1/3 border-r pr-4">
           <h2 className="text-xl mb-2">Users</h2>
@@ -79,7 +113,7 @@ const Inquiries = () => {
                   alt="User Avatar"
                   className="w-8 h-8 rounded-full mr-2"
                 />
-                <span>{user.email}</span>
+                <span>{user.displayName || user.email}</span>
               </li>
             ))}
           </ul>
@@ -93,15 +127,20 @@ const Inquiries = () => {
                   <div
                     key={msg.id}
                     className={`mb-2 p-2 rounded ${
-                      msg.from === selectedUser.email
+                      msg.from === "itsmepiglet05@gmail.com"
                         ? "bg-blue-100"
                         : "bg-gray-100"
-                    }`}
+                    } flex items-start`}
                   >
-                    <strong>
-                      {msg.from === selectedUser.email ? "User" : "Admin"}:
-                    </strong>{" "}
-                    {msg.text}
+                    <img
+                      src={msg.photoURL} // Assuming photoURL is properly set in Firestore
+                      alt="User Avatar"
+                      className="w-8 h-8 rounded-full mr-2"
+                    />
+                    <div>
+                      <strong>{msg.displayName}</strong>
+                      <p>{msg.text}</p>
+                    </div>
                   </div>
                 ))}
                 <div className="mt-4 flex">

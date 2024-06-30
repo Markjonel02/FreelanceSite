@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Collapse,
@@ -109,10 +109,10 @@ export function NavbarWithMegaMenu() {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const closeDropdown = () => {
+  /*   const closeDropdown = () => {
     setDropdownOpen(false);
   };
-
+ */
   const isAdmin = user?.email === "itsmepiglet05@gmail.com";
 
   return (

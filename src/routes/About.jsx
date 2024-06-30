@@ -1,5 +1,5 @@
 import design3 from "../assets/images/design3.svg";
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Blob2 from "../assets/images/Blob2.svg";
