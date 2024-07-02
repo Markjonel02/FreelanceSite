@@ -13,7 +13,7 @@ import Services from "../routes/Services";
 import About from "../routes/About";
 import Inquiries from "../routes/Inquiries";
 import { Nopage } from "./404/Nopage";
-
+import Messenger from "./Messages/Messages";
 const App = () => {
   const [user, setUser] = useState(null);
   const { pathname } = useLocation();
@@ -63,6 +63,7 @@ const App = () => {
           ) : (
             <Route path="/inquiries" element={<Nopage />} />
           )}
+          {user && <Route path="/messages" element={<Messenger />} />}
           <Route path="*" element={<Nopage />} />
         </Routes>
         <Footer />

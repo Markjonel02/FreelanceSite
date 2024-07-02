@@ -7,9 +7,11 @@ import "swiper/css";
 
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import { PrimeReactProvider } from "primereact/api";
+
 import { LoadPageProvider } from "./context/LazyContext.jsx";
 import { ThemeProvider } from "@material-tailwind/react";
+import { PrimeReactProvider } from "primereact/api";
+
 const AosInitializer = () => {
   useEffect(() => {
     AOS.init();

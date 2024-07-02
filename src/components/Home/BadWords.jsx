@@ -550,7 +550,7 @@ export const badWords = [
   "b*llsh*t",
   "b*llsh8t",
   "b*llshet",
-
+  "fuck",
   "jack-ass",
   "jackarse",
   "jackass",
@@ -599,7 +599,7 @@ export const badWords = [
   "HAYOP",
   "YAWA",
   "ANIMAL KA",
-
+  "t4ng1n4 mo",
   "BRUHA",
   "BRUHA",
   "LINTIK",

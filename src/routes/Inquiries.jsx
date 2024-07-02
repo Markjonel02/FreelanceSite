@@ -1,168 +1,88 @@
-import { useState, useEffect } from "react";
-import {
-  collection,
-  query,
-  onSnapshot,
-  orderBy,
-  where,
-} from "firebase/firestore";
-import { db, auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { useState } from "react";
+import blob from "../../pexels-enginakyurt-1435517.jpg";
+import TooltipDemo from "../components/Inquiries/TooltipDemo";
+const data = [
+  { name: "sample name", imgurl: blob, messages: "sample message" },
+  { name: "sample name2", imgurl: blob, messages: "sample message2" },
+  { name: "sample name3", imgurl: blob, messages: "sample message3" },
+  { name: "sample name4", imgurl: blob, messages: "sample message4" },
+  { name: "sample name5", imgurl: blob, messages: "sample message5" },
+  { name: "sample name5", imgurl: blob, messages: "sample message5" },
+  { name: "sample name5", imgurl: blob, messages: "sample message5" },
+  { name: "sample name5", imgurl: blob, messages: "sample message5" },
+  { name: "sample name5", imgurl: blob, messages: "sample message5" },
+];
 
 const Inquiries = () => {
-  const [users, setUsers] = useState([]);
-  const [conversations, setConversations] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [messageInput, setMessageInput] = useState("");
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
-      if (authUser && authUser.email === "itsmepiglet05@gmail.com") {
-        const usersRef = collection(db, "users");
-        const messagesRef = collection(db, "messages");
-
-        // Fetch all users
-        onSnapshot(usersRef, (snapshot) => {
-          const userData = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          setUsers(userData);
-        });
-
-        // Fetch messages where the admin is involved
-        const q = query(
-          messagesRef,
-          orderBy("createdAt"),
-          where("from", "==", authUser.email).orWhere(
-            "to",
-            "==",
-            authUser.email
-          )
-        );
-        onSnapshot(q, (snapshot) => {
-          const messagesData = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          setConversations(messagesData);
-        });
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  const handleUserClick = (user) => {
-    setSelectedUser(user);
-
-    // Fetch messages where either the admin or the selected user is involved
-    const q = query(
-      collection(db, "messages"),
-      orderBy("createdAt"),
-      where("from", "in", ["itsmepiglet05@gmail.com", user.email]),
-      where("to", "in", ["itsmepiglet05@gmail.com", user.email])
-    );
-
-    onSnapshot(q, (snapshot) => {
-      const messagesData = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setConversations(messagesData);
-    });
-  };
-
-  const handleMessageSend = () => {
-    if (selectedUser && messageInput.trim() !== "") {
-      const message = {
-        from: "itsmepiglet05@gmail.com", // admin's email
-        to: selectedUser.email,
-        text: messageInput,
-        createdAt: new Date(),
-      };
-
-      // Save message to Firestore
-      db.collection("messages").add(message);
-
-      // Update conversation state
-      setConversations([...conversations, message]);
-
-      // Clear input
-      setMessageInput("");
-    }
-  };
+  const [selectedChat, setSelectedChat] = useState(null);
 
   return (
-    <div className="p-4 w-full h-screen">
-      <h1 className="text-2xl mb-4 text-center bg-blue-primary p-4 rounded xl:text-2xl lg:text-xl sm:text-sm font-Lato-Bold tracking-wider text-white">
-        User Inquiries
-      </h1>
-      <div className="flex">
-        <div className="w-1/3 border-r pr-4">
-          <h2 className="text-xl mb-2">Users</h2>
-          <ul>
-            {users.map((user) => (
-              <li
-                key={user.id}
-                onClick={() => handleUserClick(user)}
-                className="cursor-pointer mb-2 p-2 bg-gray-200 rounded hover:bg-gray-300 flex items-center"
-              >
-                <img
-                  src={user.photoURL}
-                  alt="User Avatar"
-                  className="w-8 h-8 rounded-full mr-2"
-                />
-                <span>{user.displayName || user.email}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="w-2/3 pl-4">
-          <h2 className="text-xl mb-2">Conversations</h2>
-          <div className="h-64 overflow-y-auto bg-white p-4 border rounded">
-            {selectedUser ? (
-              <>
-                {conversations.map((msg) => (
-                  <div
-                    key={msg.id}
-                    className={`mb-2 p-2 rounded ${
-                      msg.from === "itsmepiglet05@gmail.com"
-                        ? "bg-blue-100"
-                        : "bg-gray-100"
-                    } flex items-start`}
-                  >
-                    <img
-                      src={msg.photoURL} // Assuming photoURL is properly set in Firestore
-                      alt="User Avatar"
-                      className="w-8 h-8 rounded-full mr-2"
-                    />
-                    <div>
-                      <strong>{msg.displayName}</strong>
-                      <p>{msg.text}</p>
+    <div className="p-4 w-full h-full">
+      <div className="relative flex flex-col lg:flex-row justify-between">
+        <div className="w-full lg:w-1/3 h-full gap-3 mb-4 lg:mb-0">
+          <div className="w-full me-2">
+            <div className="left flex flex-col m-3 border shadow-md rounded-lg h-full">
+              <div className="up bg-blue-primary rounded-sm">
+                <h1 className="font-Lato-Black mx-4 py-2 w-full text-white">
+                  Recent chats
+                </h1>
+              </div>
+              <div className="parent-left py-2 px-2 flex-1 overflow-hidden">
+                <div
+                  className="down mt-2 w-full h-full overflow-y-auto"
+                  style={{ maxHeight: "400px" }}
+                >
+                  {data.map((item, i) => (
+                    <div
+                      className="bg-gray-200 m-2 mb-3 rounded-md flex items-center justify-between hover:bg-Lighter-Blue shadow-md cursor-pointer"
+                      key={i}
+                      onClick={() => setSelectedChat(item)}
+                    >
+                      <div className="flex w-full">
+                        <div className="img-cont h-full w-16 m-2">
+                          <img
+                            src={item.imgurl}
+                            alt=""
+                            className="rounded-full w-12 h-12"
+                          />
+                        </div>
+                        <div className="name w-full">
+                          <span className="block font-Lato-Bold text-lg">
+                            {item.name}
+                          </span>
+                          <span className="block text-gray-500 font-Lato-Regular text-sm">
+                            {item.messages}
+                          </span>
+                        </div>
+                        <div className="button me-4 font-Lato-Black tracking-wider text-lg">
+                          <button>...</button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                ))}
-                <div className="mt-4 flex">
-                  <input
-                    type="text"
-                    value={messageInput}
-                    onChange={(e) => setMessageInput(e.target.value)}
-                    placeholder="Type your message..."
-                    className="w-full border rounded px-3 py-2 mr-2"
-                  />
-                  <button
-                    onClick={handleMessageSend}
-                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-                  >
-                    Send
-                  </button>
+                  ))}
                 </div>
-              </>
-            ) : (
-              <p>Select a user to view their conversation</p>
-            )}
+              </div>
+            </div>
           </div>
+        </div>
+        <div className="w-full lg:w-2/3 border border-yellow-300 p-4">
+          {selectedChat ? (
+            <div>
+              <h2 className="font-Lato-Bold text-2xl mb-2">
+                {selectedChat.name}
+              </h2>
+              <p className="mb-4">{selectedChat.messages}</p>
+              <div className="flex items-start">
+                <TooltipDemo />
+                <input
+                  className="w-full h-10 p-2 border rounded"
+                  placeholder="Type your message here..."
+                />
+              </div>
+            </div>
+          ) : (
+            <p>Select a chat to view the messages.</p>
+          )}
         </div>
       </div>
     </div>

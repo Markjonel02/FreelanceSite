@@ -12,8 +12,9 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import PropTypes from "prop-types";
 
-function NavList({ isAdmin }) {
+function NavList({ isAdmin, isLoggedIn }) {
   return (
     <List className="mx-5 mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
       <Typography
@@ -80,10 +81,27 @@ function NavList({ isAdmin }) {
           </ListItem>
         </Typography>
       )}
+      {isLoggedIn &&
+        !isAdmin && ( // condition for non-admin users
+          <Typography
+            as={Link}
+            to="/messages" // Link to Messages page
+            variant="small"
+            color="blue-gray"
+            className="font-Lato-Bold"
+          >
+            <ListItem className="flex items-center gap-2 py-2 pr-4">
+              Messages
+            </ListItem>
+          </Typography>
+        )}
     </List>
   );
 }
-
+NavList.propTypes = {
+  isAdmin: PropTypes.string.isRequired,
+  isLoggedIn: PropTypes.string.isRequired,
+};
 export function NavbarWithMegaMenu() {
   const [openNav, setOpenNav] = useState(false);
   const [user, loading] = useAuthState(auth); // Added loading state to handle initial user check
@@ -109,10 +127,6 @@ export function NavbarWithMegaMenu() {
     setDropdownOpen(!dropdownOpen);
   };
 
-  /*   const closeDropdown = () => {
-    setDropdownOpen(false);
-  };
- */
   const isAdmin = user?.email === "itsmepiglet05@gmail.com";
 
   return (
@@ -127,7 +141,7 @@ export function NavbarWithMegaMenu() {
           Project<span className="text-Dark-primary">Hub</span>
         </Typography>
         <div className="hidden lg:block">
-          <NavList isAdmin={isAdmin} />
+          <NavList isAdmin={isAdmin} isLoggedIn={!!user} />
         </div>
 
         <div className="hidden lg:flex items-center gap-2">
@@ -190,7 +204,7 @@ export function NavbarWithMegaMenu() {
         </IconButton>
       </div>
       <Collapse open={openNav}>
-        <NavList isAdmin={isAdmin} />
+        <NavList isAdmin={isAdmin} isLoggedIn={!!user} />
         <div className="flex w-full font-flex-nowrap items-center gap-2 lg:hidden">
           {user && !loading ? (
             <button
