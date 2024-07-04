@@ -14,7 +14,10 @@ import About from "../routes/About";
 import Inquiries from "../routes/Inquiries";
 import { Nopage } from "./404/Nopage";
 import Messenger from "./Messages/Messages";
+
+const email = import.meta.env.VITE_EMAIL_ADDRESS;
 const App = () => {
+
   const [user, setUser] = useState(null);
   const { pathname } = useLocation();
   const [isLoading, setIsLoading] = useState(true); // State to manage loading state
@@ -58,7 +61,7 @@ const App = () => {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contactus />} />
           <Route path="/about" element={<About />} />
-          {user && user.email === "itsmepiglet05@gmail.com" ? (
+          {user && user.email === email ? (
             <Route path="/inquiries" element={<Inquiries />} />
           ) : (
             <Route path="/inquiries" element={<Nopage />} />

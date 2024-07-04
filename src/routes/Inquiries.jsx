@@ -1,6 +1,6 @@
 import { useState } from "react";
 import blob from "../../pexels-enginakyurt-1435517.jpg";
-import TooltipDemo from "../components/Inquiries/TooltipDemo";
+
 const data = [
   { name: "sample name", imgurl: blob, messages: "sample message" },
   { name: "sample name2", imgurl: blob, messages: "sample message2" },
@@ -15,6 +15,13 @@ const data = [
 
 const Inquiries = () => {
   const [selectedChat, setSelectedChat] = useState(null);
+  const [message, setMessage] = useState("");
+
+  const handleSendMessage = () => {
+    // Implement the logic to send a message
+    console.log("Message sent:", message);
+    setMessage(""); // Clear the message input after sending
+  };
 
   return (
     <div className="p-4 w-full h-full">
@@ -27,6 +34,7 @@ const Inquiries = () => {
                   Recent chats
                 </h1>
               </div>
+
               <div className="parent-left py-2 px-2 flex-1 overflow-hidden">
                 <div
                   className="down mt-2 w-full h-full overflow-y-auto"
@@ -65,21 +73,30 @@ const Inquiries = () => {
             </div>
           </div>
         </div>
-        <div className="w-full lg:w-2/3 border border-yellow-300 p-4">
+        <div className="w-full lg:w-2/3 border border-yellow-300 p-4 flex flex-col justify-between">
           {selectedChat ? (
-            <div>
-              <h2 className="font-Lato-Bold text-2xl mb-2">
-                {selectedChat.name}
-              </h2>
-              <p className="mb-4">{selectedChat.messages}</p>
-              <div className="flex items-start">
-                <TooltipDemo />
+            <>
+              <div>
+                <h2 className="font-Lato-Bold text-2xl mb-2">
+                  {selectedChat.name}
+                </h2>
+                <p className="mb-4">{selectedChat.messages}</p>
+              </div>
+              <div className="flex items-center mt-auto">
                 <input
-                  className="w-full h-10 p-2 border rounded"
+                  className="w-full h-10 p-2 border rounded mr-2"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   placeholder="Type your message here..."
                 />
+                <button
+                  className="h-10 px-4 bg-blue-500 text-white rounded"
+                  onClick={handleSendMessage}
+                >
+                  Send
+                </button>
               </div>
-            </div>
+            </>
           ) : (
             <p>Select a chat to view the messages.</p>
           )}

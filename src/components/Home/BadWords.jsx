@@ -396,7 +396,6 @@ export const badWords = [
   "HAYOP",
   "YAWA",
   "ANIMAL KA",
-
   "BRUHA",
   "BRUHA",
   "LINTIK",
@@ -793,4 +792,5 @@ export const badWords = [
   "SPASTIC",
   "WANKER",
   "TWAT",
+  "bonak",
 ];

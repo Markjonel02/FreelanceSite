@@ -22,7 +22,7 @@
     "aos": "^2.3.4",
     "axios": "^1.7.2",
     "firebase": "^10.12.2",
-    "flowbite": "^2.3.0",
+    "flowbite": "^2.4.1",
     "gsap": "^3.12.5",
     "icons": "^1.0.0",
     "install": "^0.13.0",
@@ -44,7 +44,7 @@
   "devDependencies": {
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
-    "@vitejs/plugin-react": "^4.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",

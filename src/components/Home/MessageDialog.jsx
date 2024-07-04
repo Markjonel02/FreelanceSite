@@ -13,19 +13,21 @@ import {
 import { db, auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { badWords } from "./BadWords";
-import AutoDelete from "./AutoDelete"; // Import AutoDeleteMessages component
+import AutoDelete from "./AutoDelete";
+import Admin from "../../assets/images/Admin.jpg";
 
 const MessageDialog = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const messagesEndRef = useRef(null);
   const [showTooltip, setShowTooltip] = useState(false);
   const [showBeKindWarning, setShowBeKindWarning] = useState(false);
   const [showBadWordModal, setShowBadWordModal] = useState(false);
   const [selectedMessageId, setSelectedMessageId] = useState(null);
-  const [isSending, setIsSending] = useState(false); // Initialize isSending state
+  const [isSending, setIsSending] = useState(false);
 
   const handleMouseEnter = () => {
     setShowTooltip(true);
@@ -42,8 +44,11 @@ const MessageDialog = () => {
           // If user data does not exist, create a new document
           await setDoc(userDocRef, {
             badWordOffenses: 0,
-            isRestricted: false,
+            isRestricted: true,
           });
+        } else {
+          // Check if the user is an admin
+          setIsAdmin(userDocSnap.data().isAdmin || false);
         }
 
         const q = query(collection(db, "messages"), orderBy("createdAt"));
@@ -81,19 +86,21 @@ const MessageDialog = () => {
   const handleSend = async (e) => {
     e.preventDefault();
 
+    // Check if new message contains any bad words
     const containsBadWord = badWords.some((word) =>
       newMessage.toLowerCase().includes(word)
     );
 
     if (containsBadWord) {
-      setShowBadWordModal(true);
-      return;
+      setShowBadWordModal(true); // Show modal warning
+      return; // Stop further execution
     }
 
     if (newMessage.trim() !== "") {
       setIsSending(true); // Set isSending to true when sending starts
 
       try {
+        // Add message to Firestore
         await addDoc(collection(db, "messages"), {
           text: newMessage,
           from: user.email,
@@ -102,10 +109,11 @@ const MessageDialog = () => {
           displayName: user.displayName,
           createdAt: new Date(),
         });
-        setNewMessage("");
-        setShowTooltip(true);
+
+        setNewMessage(""); // Clear input after sending
+        setShowTooltip(true); // Show tooltip
         setTimeout(() => {
-          setShowTooltip(false);
+          setShowTooltip(false); // Hide tooltip after 2 seconds
         }, 2000);
       } catch (error) {
         console.error("Error sending message:", error);
@@ -156,15 +164,40 @@ const MessageDialog = () => {
       </button>
 
       {isVisible && (
-        <div className="fixed bottom-36 z-20 right-10 w-80 p-4 bg-white shadow-lg bg-opacity-90 backdrop-blur-lg rounded-lg border border-gray-300">
+        <div className="fixed bottom-36 z-20 right-10 w-96 bg-white shadow-lg bg-opacity-90 backdrop-blur-lg rounded-lg border border-gray-300">
+          {!isAdmin && (
+            <>
+              <div className="low flex flex-col justify-center items-center bg-[#3e82f7ff] w-full h-28 rounded-t-lg">
+                <div className="flex">
+                  <img
+                    src={Admin}
+                    alt="Admin"
+                    className="w-8 h-8 rounded-full me-2 flex bg-black"
+                    onMouseEnter={handleMouseEnter}
+                    title={showTooltip ? "Admin" : null}
+                  />
+                </div>
+                <span className="font-Lato-Bold mt-2 tracking-wide text-white">
+                  Chat with support
+                </span>
+                <div className="flex justify-center items-center ">
+                  <div className="rounded-full bg-green-400 h-2 w-2 me-2"></div>
+                  <span className="font-Lato-Light text-sm text-gray-200">
+                    Typically replies in a minute
+                  </span>
+                </div>
+              </div>
+            </>
+          )}
           {showBeKindWarning && (
-            <div className="bg-yellow-100 text-yellow-800 p-2 rounded-md mb-2">
-              <p className="text-sm">
-                Please be kind to others. This is an open chat.
+            <div className=" m-2 relative flex justify-center  items-center bg-yellow-100 text-yellow-800 p-2 rounded-md  ">
+              <p className="text-sm  ">
+                Let’s maintain a positive and respectful atmosphere in this open
+                chat. Kindness matters! 😊
               </p>
             </div>
           )}
-          <div className="flex flex-col space-y-2 h-64 overflow-y-auto mb-2">
+          <div className="flex flex-col space-y-2 h-64 overflow-y-auto mb-2 m-2">
             {messages.map((msg, index) => {
               const isCurrentUser = user && msg.uid === user.uid;
               const isLastFromUser =
@@ -191,7 +224,10 @@ const MessageDialog = () => {
                   {isCurrentUser ? (
                     <div className="flex items-end">
                       <div>
-                        <div className="bg-blue-500 text-white p-2 rounded-lg max-w-xs">
+                        <div
+                          className="bg-blue-500 text-white p-2 rounded-lg max-w-xs"
+                          style={{ wordBreak: "break-word" }}
+                        >
                           {msg.text}
                         </div>
                         {selectedMessageId === msg.id && (
@@ -215,7 +251,10 @@ const MessageDialog = () => {
                           {messageTime}
                         </div>
                       )}
-                      <div className="bg-gray-200 p-2 rounded-lg max-w-xs">
+                      <div
+                        className="bg-gray-200 p-2 rounded-lg max-w-xs"
+                        style={{ wordBreak: "break-word" }}
+                      >
                         {msg.text}
                       </div>
                       {isLastFromUser && (
@@ -233,18 +272,18 @@ const MessageDialog = () => {
 
             <div ref={messagesEndRef} />
           </div>
-          <div className="mt-4 flex flex-col items-end">
+          <div className="flex flex-col items-end p-2">
             <button
               type="submit"
               onClick={handleSend}
-              className={`absolute mt-3 me-2 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 focus:outline-none ${
+              className={`absolute mt-4 me-2 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 focus:outline-none ${
                 isSending ? "opacity-50 cursor-not-allowed" : ""
               }`}
               disabled={!newMessage.trim() || isSending} // Disable based on sending state
             >
               <HiPaperAirplane />
             </button>
-            <form onSubmit={handleSend} className="flex w-full">
+            <form onSubmit={handleSend} className="flex w-full ">
               <textarea
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
