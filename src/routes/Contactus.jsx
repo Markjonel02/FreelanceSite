@@ -4,7 +4,7 @@ import Contactform from "../components/Contact/Contactform";
 import Blob2 from "../assets/images/Blob2.svg";
 import { useRef } from "react";
 import { gsap } from "gsap";
-/* import AddAdmin from "../components/Contact/AddAdmin" */;
+import { AddAdmin } from "../components/Contact/AddAdmin";
 import { useLazyContext } from "../context/LazyContext";
 import Loader from "../components/Home/Loader";
 const Contactus = () => {
@@ -83,8 +83,6 @@ const Contactus = () => {
               data-aos-duration="2500"
               data-aos-offset="300"
             >
-              {" "}
-             {/*  <AddAdmin /> */}
               <BubbleAnimation />
               <img
                 src={Blob2}
@@ -98,8 +96,8 @@ const Contactus = () => {
               />
             </div>
           </div>
-
           <Contactform id="contact" />
+          <AddAdmin></AddAdmin>
         </>
       ) : (
         <Loader />

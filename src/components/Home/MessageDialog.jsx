@@ -197,7 +197,7 @@ const MessageDialog = () => {
               </p>
             </div>
           )}
-          <div className="flex flex-col space-y-2 h-64 overflow-y-auto mb-2 m-2">
+          <div className="flex flex-col space-y-2 h-44 overflow-y-auto mb-2 m-2">
             {messages.map((msg, index) => {
               const isCurrentUser = user && msg.uid === user.uid;
               const isLastFromUser =
