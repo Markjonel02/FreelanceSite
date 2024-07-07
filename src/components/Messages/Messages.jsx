@@ -24,7 +24,7 @@ const Messenger = () => {
   );
 };
 
-const Message = ({ message }) => {
+const Message = (message) => {
   const { text, timestamp, sender } = message;
   const messageClass = sender === "user" ? "user-message" : "other-message";
 
@@ -36,7 +36,7 @@ const Message = ({ message }) => {
   );
 };
 
-const MessageInput = ({ onSubmit }) => {
+const MessageInput = (onSubmit) => {
   const [inputText, setInputText] = useState("");
 
   const handleSubmit = (e) => {

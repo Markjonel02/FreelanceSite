@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { auth } from "../firebase"; // Import your initialized Firebase auth
 
@@ -14,10 +14,9 @@ import About from "../routes/About";
 import Inquiries from "../routes/Inquiries";
 import { Nopage } from "./404/Nopage";
 import Messenger from "./Messages/Messages";
-
+import News from "../routes/News";
 const email = import.meta.env.VITE_EMAIL_ADDRESS;
 const App = () => {
-
   const [user, setUser] = useState(null);
   const { pathname } = useLocation();
   const [isLoading, setIsLoading] = useState(true); // State to manage loading state
@@ -61,6 +60,7 @@ const App = () => {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contactus />} />
           <Route path="/about" element={<About />} />
+          <Route path="/news" element={<News />} />
           {user && user.email === email ? (
             <Route path="/inquiries" element={<Inquiries />} />
           ) : (

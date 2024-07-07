@@ -13,7 +13,7 @@ import {
 import { db, auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { badWords } from "./BadWords";
-import AutoDelete from "./AutoDelete";
+
 import Admin from "../../assets/images/Admin.jpg";
 
 const MessageDialog = () => {
@@ -315,8 +315,6 @@ const MessageDialog = () => {
           </div>
         </div>
       )}
-
-      <AutoDelete />
     </div>
   );
 };

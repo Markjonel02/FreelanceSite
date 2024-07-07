@@ -103,7 +103,7 @@ const Inquiries = () => {
         </div>
       </div>
     </div>
-  );
+  );  
 };
 
 export default Inquiries;

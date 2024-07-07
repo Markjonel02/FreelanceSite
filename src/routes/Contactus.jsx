@@ -4,11 +4,8 @@ import Contactform from "../components/Contact/Contactform";
 import Blob2 from "../assets/images/Blob2.svg";
 import { useRef } from "react";
 import { gsap } from "gsap";
-import { AddAdmin } from "../components/Contact/AddAdmin";
-import { useLazyContext } from "../context/LazyContext";
-import Loader from "../components/Home/Loader";
+/* import ProfileCard from "../components/Contact/ProfileCard"; */
 const Contactus = () => {
-  const { isLoading } = useLazyContext();
   const buttonRef = useRef(null);
   const bgRef = useRef(null);
 
@@ -31,77 +28,73 @@ const Contactus = () => {
   };
   return (
     <>
-      {isLoading ? (
-        <>
-          <div className="relative flex flex-col justify-start items-center md:flex-row">
-            <div className="flex top-0 left-0">
-              <img
-                src={Blob2}
-                alt=""
-                className="absolute opacity-25  w-[700px]  top-0 left-0 "
-              />
-            </div>
+      <>
+        <div className="relative flex flex-col justify-start items-center md:flex-row">
+          <div className="flex top-0 left-0">
+            <img
+              src={Blob2}
+              alt=""
+              className="absolute opacity-25  w-[700px]  top-0 left-0 "
+            />
+          </div>
 
-            <div className=" absolute z-50 mx-8   text-center md:text-left md:order-1">
-              <h1
-                className="text-3xl xl:text-7xl md:text-6xl sm:text-4xl font-Lato-Black top text-blue-primary"
-                data-aos="fade-right"
-                data-aos-duration="1800"
-                data-aos-offset="300"
-              >
-                Contact Us
-              </h1>
-              <p
-                className="mt-2 text-xl xl:text-2xl font-Lato-Light text-blue-primary mb-8"
-                data-aos="fade-right"
-                data-aos-duration="2200"
-              >
-                Feel free to reach out to us for any inquiries or questions.
-              </p>
-
-              <a
-                href="#contact"
-                className="relative z-10 text-blue-primary text-xl text-center font-Lato-Regular border border-blue-primary hover:text-white py-4 px-8 rounded-lg overflow-hidden"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                ref={buttonRef}
-                data-aos="fade-right"
-                data-aos-duration="2200"
-              >
-                <span
-                  ref={bgRef}
-                  className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-primary to-blue-primary  transform scale-x-0 rounded-lg"
-                  style={{ zIndex: -1 }}
-                ></span>
-                Send a message
-              </a>
-            </div>
-            <div className="background relative z-10 w-full h-screen md:w-auto md:flex-1"></div>
-            <div
-              className="right-elem absolute flex justify-center items-center top-20 right-0 z-20 md:order-2"
-              data-aos="fade-up"
-              data-aos-duration="2500"
+          <div className=" absolute z-50 mx-8   text-center md:text-left md:order-1">
+            <h1
+              className="text-3xl xl:text-7xl md:text-6xl sm:text-4xl font-Lato-Black top text-blue-primary"
+              data-aos="fade-right"
+              data-aos-duration="1800"
               data-aos-offset="300"
             >
-              <BubbleAnimation />
-              <img
-                src={Blob2}
-                alt="gradient"
-                className="absolute opacity-40 right-0"
-              />
-              <img
-                src={Phone}
-                alt="Phone"
-                className="phone-img w-full h-full ease-in"
-              />
-            </div>
+              Contact Us
+            </h1>
+            <p
+              className="mt-2 text-xl xl:text-2xl font-Lato-Light text-blue-primary mb-8"
+              data-aos="fade-right"
+              data-aos-duration="2200"
+            >
+              Feel free to reach out to us for any inquiries or questions.
+            </p>
+
+            <a
+              href="#contact"
+              className="relative z-10 text-blue-primary text-xl text-center font-Lato-Regular border border-blue-primary hover:text-white py-4 px-8 rounded-lg overflow-hidden"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              ref={buttonRef}
+              data-aos="fade-right"
+              data-aos-duration="2200"
+            >
+              <span
+                ref={bgRef}
+                className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-primary to-blue-primary  transform scale-x-0 rounded-lg"
+                style={{ zIndex: -1 }}
+              ></span>
+              Send a message
+            </a>
           </div>
-          <Contactform id="contact" />
-          <AddAdmin></AddAdmin>
-        </>
-      ) : (
-        <Loader />
-      )}
+          <div className="background relative z-10 w-full h-screen md:w-auto md:flex-1"></div>
+          <div
+            className="right-elem absolute flex justify-center items-center top-20 right-0 z-20 md:order-2"
+            data-aos="fade-up"
+            data-aos-duration="2500"
+            data-aos-offset="300"
+          >
+            <BubbleAnimation />
+            <img
+              src={Blob2}
+              alt="gradient"
+              className="absolute opacity-40 right-0"
+            />
+            <img
+              src={Phone}
+              alt="Phone"
+              className="phone-img w-full h-full ease-in"
+            />
+          </div>
+        </div>{" "}
+        {/*      <ProfileCard /> */}
+        <Contactform id="contact" />
+      </>
     </>
   );
 };

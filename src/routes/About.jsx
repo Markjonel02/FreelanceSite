@@ -8,7 +8,7 @@ import Aboutsection from "../components/About/Aboutsection";
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
-  const imageRef = useRef(null);
+  const imageRef = useRef();
 
   useEffect(() => {
     gsap.set(imageRef.current, { transformOrigin: "center" });

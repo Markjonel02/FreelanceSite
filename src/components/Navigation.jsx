@@ -99,8 +99,8 @@ function NavList({ isAdmin, isLoggedIn }) {
   );
 }
 NavList.propTypes = {
-  isAdmin: PropTypes.string.isRequired,
-  isLoggedIn: PropTypes.string.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
 };
 export function NavbarWithMegaMenu() {
   const [openNav, setOpenNav] = useState(false);
