@@ -167,7 +167,7 @@ const MessageDialog = () => {
         <div className="fixed bottom-36 z-20 right-10 w-96 bg-white shadow-lg bg-opacity-90 backdrop-blur-lg rounded-lg border border-gray-300">
           {!isAdmin && (
             <>
-              <div className="low flex flex-col justify-center items-center bg-[#3e82f7ff] w-full h-28 rounded-t-lg">
+              <div className="low  flex flex-col justify-center items-center bg-[#3e82f7ff] w-full h-28 rounded-t-lg">
                 <div className="flex">
                   <img
                     src={Admin}
@@ -197,7 +197,7 @@ const MessageDialog = () => {
               </p>
             </div>
           )}
-          <div className="flex flex-col space-y-2 h-44 overflow-y-auto mb-2 m-2">
+          <div className="flex flex-col space-y-2 h-52 overflow-y-auto mb-2 m-2">
             {messages.map((msg, index) => {
               const isCurrentUser = user && msg.uid === user.uid;
               const isLastFromUser =
