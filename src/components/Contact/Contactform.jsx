@@ -2,12 +2,44 @@ import { Input } from "@material-tailwind/react";
 import { Textarea } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import Blob2 from "../../assets/images/Blob2.svg";
+import axios from "axios";
+import { useState } from "react";
+
 const Contactform = () => {
+  const [form, setForm] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    message: "",
+  });
+  const handleChange = (e) => {
+    e.preventDefault();
+    setForm({
+      ...form,
+      [e.target.firstname]: e.target.value,
+      [e.target.lastname]: e.target.value,
+      [e.target.email]: e.target.value,
+      [e.target.message]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/Emailer/Emailer",
+        form
+      );
+      alert(response.data.message);
+    } catch (error) {
+      alert("Error sending email. Please try again later.");
+    }
+  };
   return (
     <>
       <div className="relative ">
         {" "}
-        <img src={Blob2} alt="" className="absolute opacity-25 right-10" />
+        {/*     <img src={Blob2} alt="" className="absolute opacity-25 right-10" /> */}
         <h2
           className="text-2xl xl:text-5xl font-Lato-Black mb-4 text-center mt-10 text-blue-primary"
           data-aos="fade-right"
@@ -90,19 +122,29 @@ const Contactform = () => {
             data-aos="fade-down"
             data-aos-duration="2000"
           >
-            <form action="#" method="POST" className="space-y-4">
+            <form
+              action="#"
+              method="POST"
+              className="space-y-4"
+              onSubmit={handleSubmit}
+            >
               <div className="flex flex-wrap -mx-2">
                 <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
                   <Input
                     size="lg"
                     label="First Name"
+                    name="firstname"
                     className="focus:outline-none focus:ring-0 "
+                  /*   value={form.firstname} */
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="w-full md:w-1/2 px-2">
                   <Input
                     size="lg"
                     label="Last Name"
+             /*        value={form.lastname} */
+                    name="lastname"
                     className="focus:outline-none focus:ring-0 "
                   />
                 </div>
@@ -111,6 +153,8 @@ const Contactform = () => {
                     size="lg"
                     label="Email"
                     type="email"
+                    name="email"
+              /*       value={form.email} */
                     className="focus:outline-none focus:ring-0"
                   />
                 </div>
@@ -120,6 +164,7 @@ const Contactform = () => {
                 label="Enter your inquiry"
                 cols={30}
                 rows={10}
+             /*    value={form.message} */
                 className="focus:outline-none focus:ring-0 "
               />
               <Button className="w-full font-Lato-Medium py-4 text-md bg-blue-primary">
